@@ -1,7 +1,7 @@
 'use client'
 import { useState, useMemo } from 'react'
 import dynamic from 'next/dynamic'
-import { cities, itinerary, flights, vehicles, events, type Activity } from '@/data/tripData'
+import { cities, itinerary, flights, vehicles, events, segmentTargetDates, type Activity } from '@/data/tripData'
 
 const MapComponent = dynamic(() => import('./MapComponent'), { ssr: false, loading: () => <div className="h-[500px] bg-slate-100 rounded-xl flex items-center justify-center">Chargement de la carte...</div> })
 
@@ -309,71 +309,111 @@ export function BudgetTab() {
 
 // ==================== VOLS ====================
 export function VolsTab() {
-  const [segment, setSegment] = useState<string>('all')
-  const [sortBy, setSortBy] = useState<'price' | 'airline' | 'duration'>('price')
+  const segments = ['syd-gc', 'gc-ppp', 'ppp-syd'] as const
+  const segmentLabels: Record<string, string> = { 'syd-gc': 'Sydney → Gold Coast (1 mai)', 'gc-ppp': 'Gold Coast → Proserpine (8 mai)', 'ppp-syd': 'Proserpine → Sydney (11 mai)' }
+  const [segment, setSegment] = useState<string>('syd-gc')
+  const [selectedDate, setSelectedDate] = useState<string>('all')
+  const [sortBy, setSortBy] = useState<'price' | 'time' | 'airline'>('time')
 
-  const segmentLabels: Record<string, string> = { all: 'Tous', 'syd-gc': 'Sydney → Gold Coast', 'gc-ppp': 'Gold Coast → Proserpine', 'ppp-syd': 'Proserpine → Sydney' }
+  const segFlights = useMemo(() => flights.filter(f => f.segment === segment), [segment])
+  const dates = useMemo(() => [...new Set(segFlights.map(f => f.date))], [segFlights])
+  const targetDate = segmentTargetDates[segment]
 
-  const filtered = flights
-    .filter(f => segment === 'all' || f.segment === segment)
-    .sort((a, b) => {
-      if (sortBy === 'price') return a.priceLow - b.priceLow
-      if (sortBy === 'airline') return a.airline.localeCompare(b.airline)
-      return a.duration.localeCompare(b.duration)
+  const filtered = useMemo(() => {
+    const base = selectedDate === 'all' ? segFlights : segFlights.filter(f => f.date === selectedDate)
+    return base.sort((a, b) => {
+      if (sortBy === 'price') return a.price - b.price
+      if (sortBy === 'airline') return a.airline.localeCompare(b.airline) || a.departure.localeCompare(b.departure)
+      return a.date.localeCompare(b.date) || a.departure.localeCompare(b.departure)
     })
+  }, [segFlights, selectedDate, sortBy])
+
+  const minPrice = useMemo(() => Math.min(...segFlights.map(f => f.price)), [segFlights])
+  const maxPrice = useMemo(() => Math.max(...segFlights.map(f => f.price)), [segFlights])
+
+  function priceColor(price: number) {
+    const ratio = (price - minPrice) / (maxPrice - minPrice || 1)
+    if (ratio < 0.33) return 'text-green-600 font-bold'
+    if (ratio < 0.66) return 'text-sky-600 font-medium'
+    return 'text-red-500 font-medium'
+  }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h2 className="text-2xl font-bold">Comparatif vols</h2>
-        <span className="text-xs bg-slate-100 text-slate-500 px-3 py-1 rounded-full">Dernière mise à jour : 2 avril 2026</span>
+        <span className="text-xs bg-slate-100 text-slate-500 px-3 py-1 rounded-full">Prix par personne, aller simple</span>
       </div>
-      <p className="text-slate-500 text-sm">Prix par personne, aller simple. Dates indicatives : 1, 8, 11 mai 2026.</p>
+      <p className="text-slate-500 text-sm">Plage de dates : 3 jours avant et après la date cible. Prix indicatifs simulés.</p>
 
+      {/* Segment tabs */}
       <div className="flex flex-wrap gap-2">
-        {Object.entries(segmentLabels).map(([key, label]) => (
-          <button key={key} onClick={() => setSegment(key)} className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${segment === key ? 'bg-sky-500 text-white border-sky-500' : 'border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{label}</button>
+        {segments.map(s => (
+          <button key={s} onClick={() => { setSegment(s); setSelectedDate('all') }} className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${segment === s ? 'bg-sky-500 text-white border-sky-500' : 'border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{segmentLabels[s]}</button>
         ))}
       </div>
 
+      {/* Date pills */}
+      <div className="flex flex-wrap gap-1.5">
+        <button onClick={() => setSelectedDate('all')} className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${selectedDate === 'all' ? 'bg-slate-700 text-white border-slate-700' : 'border-slate-200 text-slate-500'}`}>Toutes</button>
+        {dates.map(d => {
+          const isTarget = d === targetDate
+          return (
+            <button key={d} onClick={() => setSelectedDate(d)} className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${selectedDate === d ? 'bg-sky-500 text-white border-sky-500' : isTarget ? 'border-sky-300 text-sky-600 bg-sky-50 font-medium' : 'border-slate-200 text-slate-500'}`}>
+              {d}{isTarget ? ' *' : ''}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Sort */}
       <div className="flex gap-2 text-xs">
         <span className="text-slate-400">Trier par :</span>
-        {(['price', 'airline', 'duration'] as const).map(s => (
+        {(['time', 'price', 'airline'] as const).map(s => (
           <button key={s} onClick={() => setSortBy(s)} className={`px-2 py-0.5 rounded ${sortBy === s ? 'bg-sky-100 text-sky-700 font-medium' : 'text-slate-500 hover:text-slate-700'}`}>
-            {s === 'price' ? 'Prix' : s === 'airline' ? 'Compagnie' : 'Durée'}
+            {s === 'price' ? 'Prix' : s === 'airline' ? 'Compagnie' : 'Horaire'}
           </button>
         ))}
       </div>
 
+      {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full text-sm border rounded-xl overflow-hidden">
           <thead className="bg-slate-50">
             <tr>
+              <th className="text-left p-3">Date</th>
+              <th className="text-center p-3">Départ</th>
               <th className="text-left p-3">Compagnie</th>
               <th className="text-left p-3">Trajet</th>
-              <th className="text-center p-3">Date</th>
               <th className="text-center p-3">Prix</th>
               <th className="text-center p-3">Durée</th>
               <th className="text-center p-3">Bagage</th>
-              <th className="text-center p-3">Fréquence</th>
               <th className="text-center p-3">Réserver</th>
             </tr>
           </thead>
           <tbody>
-            {filtered.map((f, i) => (
-              <tr key={i} className="border-t hover:bg-slate-50/50">
-                <td className="p-3 font-medium">{f.airline}</td>
-                <td className="p-3 text-slate-600 text-xs">{f.from} → {f.to}</td>
-                <td className="p-3 text-center text-xs text-slate-500">{f.date}</td>
-                <td className="p-3 text-center font-medium text-sky-600">${f.priceLow}-${f.priceHigh}</td>
-                <td className="p-3 text-center">{f.duration}</td>
-                <td className="p-3 text-center">{f.baggageIncluded ? <span className="text-green-500">✓ Inclus</span> : <span className="text-red-400">✗ Payant</span>}</td>
-                <td className="p-3 text-center text-slate-500 text-xs">{f.frequency}</td>
-                <td className="p-3 text-center"><a href={f.bookingUrl} target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:text-sky-700 text-xs font-medium">Réserver ↗</a></td>
-              </tr>
-            ))}
+            {filtered.map((f, i) => {
+              const isTarget = f.date === targetDate
+              return (
+                <tr key={i} className={`border-t hover:bg-slate-50/50 ${isTarget ? 'bg-sky-50/50' : ''}`}>
+                  <td className={`p-3 text-xs ${isTarget ? 'font-bold text-sky-700' : 'text-slate-500'}`}>{f.date}{isTarget ? ' *' : ''}</td>
+                  <td className="p-3 text-center font-mono text-sm">{f.departure}</td>
+                  <td className="p-3 font-medium">{f.airline}</td>
+                  <td className="p-3 text-slate-600 text-xs">{f.from} → {f.to}</td>
+                  <td className={`p-3 text-center ${priceColor(f.price)}`}>${f.price}</td>
+                  <td className="p-3 text-center text-xs">{f.duration}</td>
+                  <td className="p-3 text-center">{f.baggageIncluded ? <span className="text-green-500 text-xs">Inclus</span> : <span className="text-red-400 text-xs">Payant</span>}</td>
+                  <td className="p-3 text-center"><a href={f.bookingUrl} target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:text-sky-700 text-xs font-medium">Réserver ↗</a></td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
+      </div>
+
+      <div className="text-xs text-slate-400 space-y-1">
+        <p>* = date cible de l'itinéraire. Vert = bon prix, rouge = prix élevé.</p>
+        <p>Les horaires tôt le matin et tard le soir sont généralement moins chers.</p>
       </div>
     </div>
   )
