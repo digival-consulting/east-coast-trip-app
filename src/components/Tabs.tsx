@@ -130,8 +130,8 @@ export function VillesTab() {
       <h2 className="text-2xl font-bold">Explorer par ville</h2>
       <p className="text-slate-500 text-sm">Cliquez sur une ville pour voir toutes les activités avec 3 fourchettes de prix et liens de réservation.</p>
       {cities.map(city => (
-        <div key={city.id} className="border rounded-xl overflow-hidden">
-          <button onClick={() => setOpen(open === city.id ? null : city.id)} className="w-full flex items-center gap-3 p-3 hover:bg-slate-50 transition-colors text-left">
+        <div key={city.id} className="border rounded-xl">
+          <button onClick={() => setOpen(open === city.id ? null : city.id)} className="w-full flex items-center gap-3 p-3 hover:bg-slate-50 transition-colors text-left rounded-t-xl">
             <img src={city.image} alt={city.name} className="w-16 h-16 rounded-lg object-cover shrink-0" />
             <div className="flex-1 min-w-0">
               <h3 className="font-bold">{city.name}</h3>
@@ -143,8 +143,8 @@ export function VillesTab() {
             <svg className={`w-5 h-5 text-slate-400 transition-transform shrink-0 ${open === city.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </button>
           {open === city.id && (
-            <div className="border-t overflow-x-auto">
-              <table className="w-full text-sm">
+            <div className="border-t overflow-visible">
+              <table className="w-full text-sm overflow-visible">
                 <thead className="bg-slate-50">
                   <tr>
                     <th className="text-left p-3 font-medium">Activité</th>
@@ -351,6 +351,7 @@ export function VolsTab() {
             <tr>
               <th className="text-left p-3">Compagnie</th>
               <th className="text-left p-3">Trajet</th>
+              <th className="text-center p-3">Date</th>
               <th className="text-center p-3">Prix</th>
               <th className="text-center p-3">Durée</th>
               <th className="text-center p-3">Bagage</th>
@@ -363,6 +364,7 @@ export function VolsTab() {
               <tr key={i} className="border-t hover:bg-slate-50/50">
                 <td className="p-3 font-medium">{f.airline}</td>
                 <td className="p-3 text-slate-600 text-xs">{f.from} → {f.to}</td>
+                <td className="p-3 text-center text-xs text-slate-500">{f.date}</td>
                 <td className="p-3 text-center font-medium text-sky-600">${f.priceLow}-${f.priceHigh}</td>
                 <td className="p-3 text-center">{f.duration}</td>
                 <td className="p-3 text-center">{f.baggageIncluded ? <span className="text-green-500">✓ Inclus</span> : <span className="text-red-400">✗ Payant</span>}</td>
@@ -453,25 +455,34 @@ export function EvenementsTab() {
       <p className="text-slate-500 text-sm">Marchés, festivals et événements sur le trajet.</p>
       <div className="space-y-3">
         {events.map((e, i) => (
-          <div key={i} className="border rounded-xl p-4 bg-white">
-            <div className="flex flex-col md:flex-row md:items-start gap-3">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${eventBadge[e.type] || 'bg-slate-100 text-slate-600'}`}>{e.type}</span>
-                  {e.mustSee && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">⭐ À ne pas louper</span>}
-                  <span className="text-sm font-bold">{e.name}</span>
+          <div key={i} className="border rounded-xl overflow-hidden bg-white">
+            <div className="flex flex-col md:flex-row">
+              {e.image && (
+                <div className="w-full md:w-40 h-32 md:h-auto shrink-0">
+                  <img src={e.image} alt={e.name} className="w-full h-full object-cover" />
                 </div>
-                <p className="text-sm text-slate-500">{e.description}</p>
-                <div className="mt-2 space-y-0.5 text-xs text-slate-400">
-                  <div>📍 <strong className="text-slate-600">{e.location}</strong></div>
-                  <div>🕐 {e.hours}</div>
-                  <div>💰 {e.price}</div>
+              )}
+              <div className="flex-1 p-4">
+                <div className="flex flex-col md:flex-row md:items-start gap-3">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${eventBadge[e.type] || 'bg-slate-100 text-slate-600'}`}>{e.type}</span>
+                      {e.mustSee && <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">A ne pas louper</span>}
+                      <span className="text-sm font-bold">{e.name}</span>
+                    </div>
+                    <p className="text-sm text-slate-500">{e.description}</p>
+                    <div className="mt-2 space-y-0.5 text-xs text-slate-400">
+                      <div>Lieu : <strong className="text-slate-600">{e.location}</strong></div>
+                      <div>Horaires : {e.hours}</div>
+                      <div>Prix : {e.price}</div>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0 space-y-1">
+                    <div className="text-sm font-medium">{e.date}</div>
+                    <div className="text-xs text-slate-400">{e.city}</div>
+                    <a href={e.officialUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-xs text-sky-500 hover:text-sky-700 font-medium">Site officiel ↗</a>
+                  </div>
                 </div>
-              </div>
-              <div className="text-right shrink-0 space-y-1">
-                <div className="text-sm font-medium">{e.date}</div>
-                <div className="text-xs text-slate-400">{e.city}</div>
-                <a href={e.officialUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-1 text-xs text-sky-500 hover:text-sky-700 font-medium">Site officiel ↗</a>
               </div>
             </div>
           </div>

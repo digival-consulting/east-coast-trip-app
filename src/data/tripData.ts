@@ -45,6 +45,7 @@ export interface Flight {
   from: string
   to: string
   segment: 'syd-gc' | 'gc-ppp' | 'ppp-syd'
+  date: string
   priceLow: number
   priceHigh: number
   duration: string
@@ -75,6 +76,7 @@ export interface TripEvent {
   price: string
   type: 'market' | 'festival' | 'sport' | 'nature' | 'food'
   officialUrl: string
+  image: string
   mustSee: boolean
   lat: number
   lng: number
@@ -216,57 +218,57 @@ export const cities: City[] = [
 export const itinerary: Day[] = [
   { day: 1, date: '1 mai', title: 'Sydney → Gold Coast', cityId: 'gold-coast', caption: 'Vue aérienne de Burleigh Heads et de son headland emblématique',
     highlights: [
-      { time: '7h00-9h30', name: 'Vol aller Sydney → Gold Coast', url: 'https://www.jetstar.com' },
-      { time: '10h30-11h30', name: 'Récupération du campervan', url: 'https://www.jucy.com.au' },
+      { time: '7h00-9h30', name: 'Vol aller Sydney → Gold Coast', image: 'https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=200&h=150&fit=crop', url: 'https://www.jetstar.com' },
+      { time: '10h30-11h30', name: 'Récupération du campervan', image: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=200&h=150&fit=crop', url: 'https://www.jucy.com.au' },
       { time: '12h00-13h30', name: 'Burleigh Heads National Park', image: '/images/burleigh-heads.png', url: 'https://parks.des.qld.gov.au/parks/burleigh-head' },
-      { time: '14h00-15h30', name: 'Tallebudgera Creek — baignade', url: 'https://www.goldcoast.com.au/things-to-do/tallebudgera-creek' },
+      { time: '14h00-15h30', name: 'Tallebudgera Creek — baignade', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=150&fit=crop', url: 'https://www.goldcoast.com.au/things-to-do/tallebudgera-creek' },
     ], overnight: 'BIG4 Gold Coast Holiday Park', overnightUrl: 'https://www.big4.com.au/caravan-parks/qld/gold-coast/gold-coast-holiday-park', driveKm: 0 },
   { day: 2, date: '2 mai', title: 'Hinterland → Byron Bay', cityId: 'springbrook', caption: 'Natural Bridge : la grotte aux vers luisants de Springbrook National Park',
     highlights: [
       { time: '8h00-10h00', name: 'Natural Bridge (Springbrook)', image: '/images/springbrook.png', url: 'https://parks.des.qld.gov.au/parks/springbrook' },
-      { time: '10h30-11h30', name: 'Best of All Lookout', url: 'https://parks.des.qld.gov.au/parks/springbrook' },
-      { time: '12h00-14h00', name: 'Route vers Byron Bay (1h30)', url: '' },
-      { time: '16h00-18h00', name: 'Sunset à The Pass, Byron Bay', url: 'https://www.visitbyronbay.com' },
+      { time: '10h30-11h30', name: 'Best of All Lookout', image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=200&h=150&fit=crop', url: 'https://parks.des.qld.gov.au/parks/springbrook' },
+      { time: '12h00-14h00', name: 'Route vers Byron Bay (1h30)', image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=200&h=150&fit=crop', url: '' },
+      { time: '16h00-18h00', name: 'Sunset à The Pass, Byron Bay', image: 'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=200&h=150&fit=crop', url: 'https://www.visitbyronbay.com' },
     ], overnight: 'Broken Head Holiday Park', overnightUrl: 'https://www.brokenheadholidaypark.com.au', driveKm: 130 },
   { day: 3, date: '3 mai', title: 'Byron Bay', cityId: 'byron-bay', caption: 'Le phare de Cape Byron au lever du soleil — point le plus à l\'est de l\'Australie',
     highlights: [
       { time: '6h30-8h00', name: 'Cape Byron Lighthouse walk', image: '/images/byron-bay.png', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/cape-byron-walking-track' },
-      { time: '9h00-11h00', name: 'Cours de surf 2h', url: 'https://mojosurf.com/byron-bay' },
-      { time: '14h00-16h30', name: 'Kayak avec dauphins', url: 'https://www.capebayronkayaks.com' },
-      { time: '17h00-18h30', name: 'Coucher de soleil Main Beach', url: '' },
+      { time: '9h00-11h00', name: 'Cours de surf 2h', image: 'https://images.unsplash.com/photo-1502680390548-bdbac40a5519?w=200&h=150&fit=crop', url: 'https://mojosurf.com/byron-bay' },
+      { time: '14h00-16h30', name: 'Kayak avec dauphins', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&h=150&fit=crop', url: 'https://www.capebayronkayaks.com' },
+      { time: '17h00-18h30', name: 'Coucher de soleil Main Beach', image: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=200&h=150&fit=crop', url: '' },
     ], overnight: 'First Sun Holiday Park Byron Bay', overnightUrl: 'https://www.firstsunholidaypark.com.au', driveKm: 15 },
   { day: 4, date: '4 mai', title: 'Nimbin & Cascades', cityId: 'nimbin', caption: 'Nimbin : murales psychédéliques et ambiance hippie sur la rue principale',
     highlights: [
       { time: '8h30-10h30', name: 'Route vers Nimbin + visite village', image: '/images/nimbin.png', url: 'https://www.visitnimbin.com.au' },
-      { time: '11h00-12h30', name: 'Minyon Falls — randonnée', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/lookouts/minyon-falls-lookout' },
-      { time: '13h00-14h00', name: 'Protesters Falls', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/protesters-falls-walk' },
-      { time: '15h00-16h00', name: 'Bangalow — café et village', url: 'https://www.bangalowmarket.com.au' },
+      { time: '11h00-12h30', name: 'Minyon Falls — randonnée', image: 'https://images.unsplash.com/photo-1432405972618-c6b0cfba8b1f?w=200&h=150&fit=crop', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/lookouts/minyon-falls-lookout' },
+      { time: '13h00-14h00', name: 'Protesters Falls', image: 'https://images.unsplash.com/photo-1476611338391-6f395a0ebc7b?w=200&h=150&fit=crop', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/protesters-falls-walk' },
+      { time: '15h00-16h00', name: 'Bangalow — café et village', image: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=200&h=150&fit=crop', url: 'https://www.bangalowmarket.com.au' },
     ], overnight: 'First Sun Holiday Park Byron Bay', overnightUrl: 'https://www.firstsunholidaypark.com.au', driveKm: 140 },
   { day: 5, date: '5 mai', title: 'Crystal Castle & Plages', cityId: 'crystal-castle', caption: 'Les cristaux d\'améthyste géants du Crystal Castle dans les jardins tropicaux',
     highlights: [
       { time: '9h00-12h00', name: 'Crystal Castle & Shambhala Gardens', image: '/images/crystal-castle.png', url: 'https://crystalcastle.com.au' },
       { time: '13h00-15h00', name: 'Cabarita Beach — surf et détente', image: '/images/cabarita-beach.png', url: '' },
-      { time: '16h00-17h30', name: 'Fingal Head Lighthouse — colonnes de basalte', url: '' },
+      { time: '16h00-17h30', name: 'Fingal Head Lighthouse — colonnes de basalte', image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=200&h=150&fit=crop', url: '' },
     ], overnight: 'Kingscliff Beach Holiday Park', overnightUrl: 'https://www.kingscliffbeachholidaypark.com.au', driveKm: 90 },
   { day: 6, date: '6 mai', title: 'Lennox Head & Côte sud', cityId: 'lennox', caption: 'Vue spectaculaire depuis Pat Morton Lookout sur Seven Mile Beach',
     highlights: [
       { time: '8h30-9h30', name: 'Pat Morton Lookout', image: '/images/lennox-head.png', url: '' },
-      { time: '10h00-12h00', name: 'Lake Ainsworth — baignade tea-tree', url: '' },
-      { time: '13h00-15h00', name: 'Lennox Head surf', url: '' },
-      { time: '15h30-17h00', name: 'Seven Mile Beach — promenade', url: '' },
+      { time: '10h00-12h00', name: 'Lake Ainsworth — baignade tea-tree', image: 'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=200&h=150&fit=crop', url: '' },
+      { time: '13h00-15h00', name: 'Lennox Head surf', image: 'https://images.unsplash.com/photo-1502680390548-bdbac40a5519?w=200&h=150&fit=crop', url: '' },
+      { time: '15h30-17h00', name: 'Seven Mile Beach — promenade', image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=150&fit=crop', url: '' },
     ], overnight: 'Lennox Head Reflections Holiday Park', overnightUrl: 'https://www.reflectionsholidayparks.com.au/park/lennox-head', driveKm: 70 },
   { day: 7, date: '7 mai', title: 'Retour Gold Coast', cityId: 'gold-coast', caption: 'Snapper Rocks et Rainbow Bay — dernière session surf avant le vol',
     highlights: [
-      { time: '8h00-9h30', name: 'Dernière plage favorite', url: '' },
-      { time: '10h00-11h00', name: 'Coolangatta / Snapper Rocks', url: '' },
-      { time: '12h00-13h00', name: 'Rendu du campervan', url: 'https://www.jucy.com.au' },
+      { time: '8h00-9h30', name: 'Dernière plage favorite', image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=200&h=150&fit=crop', url: '' },
+      { time: '10h00-11h00', name: 'Coolangatta / Snapper Rocks', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&h=150&fit=crop', url: '' },
+      { time: '12h00-13h00', name: 'Rendu du campervan', image: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=200&h=150&fit=crop', url: 'https://www.jucy.com.au' },
     ], overnight: '—', overnightUrl: '', driveKm: 120 },
   { day: 8, date: '8 mai', title: 'Vol → Whitsundays', cityId: 'airlie', caption: 'L\'Airlie Beach Lagoon : piscine tropicale gratuite face à la marina',
     highlights: [
-      { time: '8h00-9h30', name: 'Vol Gold Coast → Proserpine', url: 'https://www.jetstar.com' },
-      { time: '10h00-11h00', name: 'Shuttle aéroport → Airlie Beach', url: 'https://www.whitsundaytransit.com.au' },
+      { time: '8h00-9h30', name: 'Vol Gold Coast → Proserpine', image: 'https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=200&h=150&fit=crop', url: 'https://www.jetstar.com' },
+      { time: '10h00-11h00', name: 'Shuttle aéroport → Airlie Beach', image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=200&h=150&fit=crop', url: 'https://www.whitsundaytransit.com.au' },
       { time: '12h00-14h00', name: 'Airlie Beach Lagoon', image: '/images/airlie-beach.png', url: 'https://www.airliebeach.com/things-to-do/airlie-beach-lagoon' },
-      { time: '18h00-20h00', name: 'Dîner en ville', url: '' },
+      { time: '18h00-20h00', name: 'Dîner en ville', image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=150&fit=crop', url: '' },
     ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
   { day: 9, date: '9 mai', title: 'Whitehaven Beach', cityId: 'whitsundays', caption: 'Vue aérienne de Hill Inlet — le sable blanc et l\'eau turquoise des Whitsundays',
     highlights: [
@@ -279,47 +281,47 @@ export const itinerary: Day[] = [
   { day: 11, date: '11 mai', title: 'Vol panoramique & Retour', cityId: 'gbr', caption: 'Heart Reef vu du ciel — le récif en forme de coeur iconique',
     highlights: [
       { time: '8h00-9h00', name: 'Vol panoramique Heart Reef', image: '/images/helicopter-whitsundays.png', url: 'https://www.gslaviation.com.au' },
-      { time: '10h00-11h00', name: 'Shuttle → aéroport Proserpine', url: 'https://www.whitsundaytransit.com.au' },
-      { time: '12h00-15h00', name: 'Vol retour Proserpine → Sydney', url: 'https://www.jetstar.com' },
+      { time: '10h00-11h00', name: 'Shuttle → aéroport Proserpine', image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=200&h=150&fit=crop', url: 'https://www.whitsundaytransit.com.au' },
+      { time: '12h00-15h00', name: 'Vol retour Proserpine → Sydney', image: 'https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=200&h=150&fit=crop', url: 'https://www.jetstar.com' },
     ], overnight: '—', overnightUrl: '', driveKm: 0 },
 ]
 
 export const flights: Flight[] = [
-  // Sydney → Gold Coast
-  { airline: 'Jetstar', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', priceLow: 49, priceHigh: 150, duration: '1h25', frequency: '~15 vols/jour', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com' },
-  { airline: 'Virgin Australia', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', priceLow: 79, priceHigh: 180, duration: '1h25', frequency: '~10 vols/jour', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com' },
-  { airline: 'Qantas', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', priceLow: 99, priceHigh: 220, duration: '1h25', frequency: '~8 vols/jour', baggageIncluded: true, bookingUrl: 'https://www.qantas.com' },
-  // Gold Coast → Proserpine
-  { airline: 'Jetstar', from: 'Gold Coast (OOL)', to: 'Proserpine (PPP)', segment: 'gc-ppp', priceLow: 69, priceHigh: 190, duration: '1h40', frequency: '~5 vols/semaine', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com' },
-  { airline: 'Virgin Australia', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', priceLow: 80, priceHigh: 200, duration: '1h20', frequency: '~8 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com' },
-  { airline: 'Qantas', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', priceLow: 120, priceHigh: 250, duration: '1h20', frequency: '~5 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.qantas.com' },
-  // Proserpine → Sydney
-  { airline: 'Jetstar', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', priceLow: 89, priceHigh: 220, duration: '2h15', frequency: '~5 vols/semaine', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com' },
-  { airline: 'Virgin Australia', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', priceLow: 110, priceHigh: 260, duration: '2h15', frequency: '~4 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com' },
-  { airline: 'Qantas', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', priceLow: 140, priceHigh: 300, duration: '2h10', frequency: '~3 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.qantas.com' },
+  // Sydney → Gold Coast — 1 mai
+  { airline: 'Jetstar', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', date: '1 mai 2026', priceLow: 49, priceHigh: 150, duration: '1h25', frequency: '~15 vols/jour', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com' },
+  { airline: 'Virgin Australia', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', date: '1 mai 2026', priceLow: 79, priceHigh: 180, duration: '1h25', frequency: '~10 vols/jour', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com' },
+  { airline: 'Qantas', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', date: '1 mai 2026', priceLow: 99, priceHigh: 220, duration: '1h25', frequency: '~8 vols/jour', baggageIncluded: true, bookingUrl: 'https://www.qantas.com' },
+  // Gold Coast → Proserpine — 8 mai
+  { airline: 'Jetstar', from: 'Gold Coast (OOL)', to: 'Proserpine (PPP)', segment: 'gc-ppp', date: '8 mai 2026', priceLow: 69, priceHigh: 190, duration: '1h40', frequency: '~5 vols/semaine', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com' },
+  { airline: 'Virgin Australia', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', date: '8 mai 2026', priceLow: 80, priceHigh: 200, duration: '1h20', frequency: '~8 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com' },
+  { airline: 'Qantas', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', date: '8 mai 2026', priceLow: 120, priceHigh: 250, duration: '1h20', frequency: '~5 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.qantas.com' },
+  // Proserpine → Sydney — 11 mai
+  { airline: 'Jetstar', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', date: '11 mai 2026', priceLow: 89, priceHigh: 220, duration: '2h15', frequency: '~5 vols/semaine', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com' },
+  { airline: 'Virgin Australia', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', date: '11 mai 2026', priceLow: 110, priceHigh: 260, duration: '2h15', frequency: '~4 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com' },
+  { airline: 'Qantas', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', date: '11 mai 2026', priceLow: 140, priceHigh: 300, duration: '2h10', frequency: '~3 vols/semaine', baggageIncluded: true, bookingUrl: 'https://www.qantas.com' },
 ]
 
 export const vehicles: Vehicle[] = [
-  { company: 'Jucy', type: 'van', pricePerDay: [65, 95], total7Days: [455, 665], includes: ['Lit 2 places', 'Cuisine (réchaud, frigo)', 'Assurance de base'], pickup: ['Brisbane Airport', 'Gold Coast Airport'], rating: 4, images: ['https://www.jucy.com.au/media/1024/jucy-crib-exterior.jpg', 'https://www.jucy.com.au/media/1025/jucy-crib-interior.jpg', 'https://www.jucy.com.au/media/1026/jucy-crib-bed.jpg'], bookingUrl: 'https://www.jucy.com.au/campervans/crib' },
-  { company: 'Spaceships', type: 'van', pricePerDay: [55, 85], total7Days: [385, 595], includes: ['Lit 2 places', 'Cuisine complète', 'Panneau solaire', 'WiFi'], pickup: ['Brisbane'], rating: 4, images: ['https://www.spaceshipsrentals.com.au/media/beta2-exterior.jpg', 'https://www.spaceshipsrentals.com.au/media/beta2-kitchen.jpg', 'https://www.spaceshipsrentals.com.au/media/beta2-bed.jpg'], bookingUrl: 'https://www.spaceshipsrentals.com.au' },
-  { company: 'Britz', type: 'van', pricePerDay: [80, 120], total7Days: [560, 840], includes: ['Lit 2 places', 'Cuisine', 'Douche extérieure', 'Assurance premium'], pickup: ['Brisbane', 'Gold Coast'], rating: 5, images: ['https://www.britz.com.au/media/hitop-exterior.jpg', 'https://www.britz.com.au/media/hitop-interior.jpg', 'https://www.britz.com.au/media/hitop-kitchen.jpg'], bookingUrl: 'https://www.britz.com.au' },
-  { company: 'Wicked Campers', type: 'van', pricePerDay: [45, 75], total7Days: [315, 525], includes: ['Lit 2 places', 'Cuisine basique'], pickup: ['Brisbane', 'Gold Coast'], rating: 3, images: ['https://www.wickedcampers.com.au/media/van1.jpg', 'https://www.wickedcampers.com.au/media/van2.jpg', 'https://www.wickedcampers.com.au/media/van3.jpg'], bookingUrl: 'https://www.wickedcampers.com.au' },
-  { company: 'Travellers Autobarn', type: 'van', pricePerDay: [50, 80], total7Days: [350, 560], includes: ['Lit 2 places', 'Cuisine', 'Kilométrage illimité'], pickup: ['Brisbane', 'Surfers Paradise'], rating: 4, images: ['https://www.travellers-autobarn.com.au/media/kuga-ext.jpg', 'https://www.travellers-autobarn.com.au/media/kuga-int.jpg', 'https://www.travellers-autobarn.com.au/media/kuga-bed.jpg'], bookingUrl: 'https://www.travellers-autobarn.com.au' },
-  { company: 'Budget', type: 'car', pricePerDay: [45, 70], total7Days: [315, 490], includes: ['Compact auto', 'Kilométrage illimité', 'Assurance de base'], pickup: ['Brisbane', 'Gold Coast', 'Byron Bay'], rating: 3, images: [], bookingUrl: 'https://www.budget.com.au' },
-  { company: 'Hertz', type: 'car', pricePerDay: [50, 80], total7Days: [350, 560], includes: ['Compact/SUV', 'GPS inclus', 'Kilométrage illimité'], pickup: ['Brisbane', 'Gold Coast'], rating: 4, images: [], bookingUrl: 'https://www.hertz.com.au' },
-  { company: 'Avis', type: 'car', pricePerDay: [55, 85], total7Days: [385, 595], includes: ['Compact/SUV', 'Kilométrage illimité', 'Assistance 24/7'], pickup: ['Brisbane', 'Gold Coast', 'Ballina'], rating: 4, images: [], bookingUrl: 'https://www.avis.com.au' },
-  { company: 'Thrifty', type: 'car', pricePerDay: [40, 65], total7Days: [280, 455], includes: ['Compact auto', 'Kilométrage illimité'], pickup: ['Brisbane', 'Gold Coast'], rating: 3, images: [], bookingUrl: 'https://www.thrifty.com.au' },
+  { company: 'Jucy', type: 'van', pricePerDay: [65, 95], total7Days: [455, 665], includes: ['Lit 2 places', 'Cuisine (réchaud, frigo)', 'Assurance de base'], pickup: ['Brisbane Airport', 'Gold Coast Airport'], rating: 4, images: ['https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=600&h=400&fit=crop', 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=400&fit=crop', 'https://images.unsplash.com/photo-1531356599078-eed5c5095db5?w=600&h=400&fit=crop'], bookingUrl: 'https://www.jucy.com.au/campervans/crib' },
+  { company: 'Spaceships', type: 'van', pricePerDay: [55, 85], total7Days: [385, 595], includes: ['Lit 2 places', 'Cuisine complète', 'Panneau solaire', 'WiFi'], pickup: ['Brisbane'], rating: 4, images: ['https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=600&h=400&fit=crop', 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&h=400&fit=crop'], bookingUrl: 'https://www.spaceshipsrentals.com.au' },
+  { company: 'Britz', type: 'van', pricePerDay: [80, 120], total7Days: [560, 840], includes: ['Lit 2 places', 'Cuisine', 'Douche extérieure', 'Assurance premium'], pickup: ['Brisbane', 'Gold Coast'], rating: 5, images: ['https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&h=400&fit=crop', 'https://images.unsplash.com/photo-1543731068-7e0f5beff43a?w=600&h=400&fit=crop'], bookingUrl: 'https://www.britz.com.au' },
+  { company: 'Wicked Campers', type: 'van', pricePerDay: [45, 75], total7Days: [315, 525], includes: ['Lit 2 places', 'Cuisine basique'], pickup: ['Brisbane', 'Gold Coast'], rating: 3, images: ['https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?w=600&h=400&fit=crop', 'https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=600&h=400&fit=crop'], bookingUrl: 'https://www.wickedcampers.com.au' },
+  { company: 'Travellers Autobarn', type: 'van', pricePerDay: [50, 80], total7Days: [350, 560], includes: ['Lit 2 places', 'Cuisine', 'Kilométrage illimité'], pickup: ['Brisbane', 'Surfers Paradise'], rating: 4, images: ['https://images.unsplash.com/photo-1551524559-8af4e6624178?w=600&h=400&fit=crop', 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop'], bookingUrl: 'https://www.travellers-autobarn.com.au' },
+  { company: 'Budget', type: 'car', pricePerDay: [45, 70], total7Days: [315, 490], includes: ['Compact auto', 'Kilométrage illimité', 'Assurance de base'], pickup: ['Brisbane', 'Gold Coast', 'Byron Bay'], rating: 3, images: ['https://images.unsplash.com/photo-1549317661-bd32c8ce0afa?w=600&h=400&fit=crop'], bookingUrl: 'https://www.budget.com.au' },
+  { company: 'Hertz', type: 'car', pricePerDay: [50, 80], total7Days: [350, 560], includes: ['Compact/SUV', 'GPS inclus', 'Kilométrage illimité'], pickup: ['Brisbane', 'Gold Coast'], rating: 4, images: ['https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=400&fit=crop'], bookingUrl: 'https://www.hertz.com.au' },
+  { company: 'Avis', type: 'car', pricePerDay: [55, 85], total7Days: [385, 595], includes: ['Compact/SUV', 'Kilométrage illimité', 'Assistance 24/7'], pickup: ['Brisbane', 'Gold Coast', 'Ballina'], rating: 4, images: ['https://images.unsplash.com/photo-1533473359331-2969f3c6b1d7?w=600&h=400&fit=crop'], bookingUrl: 'https://www.avis.com.au' },
+  { company: 'Thrifty', type: 'car', pricePerDay: [40, 65], total7Days: [280, 455], includes: ['Compact auto', 'Kilométrage illimité'], pickup: ['Brisbane', 'Gold Coast'], rating: 3, images: ['https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=600&h=400&fit=crop'], bookingUrl: 'https://www.thrifty.com.au' },
 ]
 
 export const events: TripEvent[] = [
-  { name: 'Byron Farmers Market', date: '1 mai (jeudi)', city: 'Byron Bay', location: 'Butler Street Reserve, Byron Bay', hours: '7h00-11h00', description: 'Marché fermier local avec producteurs bio de la région', price: 'Gratuit', type: 'market', officialUrl: 'https://www.byronfarmersmarket.com.au', mustSee: true, lat: -28.6437, lng: 153.6120 },
-  { name: 'Nimbin MardiGrass', date: '2-4 mai (ven-dim)', city: 'Nimbin', location: 'Nimbin Community Centre & rues de Nimbin', hours: '10h00-22h00', description: 'Festival annuel emblématique de Nimbin — musique, parades, culture alternative', price: 'Gratuit', type: 'festival', officialUrl: 'https://www.nimbinmardigrass.com', mustSee: true, lat: -28.5960, lng: 153.2230 },
-  { name: 'Byron Community Market', date: '4 mai (dimanche)', city: 'Byron Bay', location: 'Butler Street Reserve, Byron Bay', hours: '8h00-15h00', description: 'Grand marché artisanal mensuel (1er dimanche du mois)', price: 'Gratuit', type: 'market', officialUrl: 'https://www.byronmarkets.com.au', mustSee: true, lat: -28.6437, lng: 153.6120 },
-  { name: 'Byron Farmers Market', date: '8 mai (jeudi)', city: 'Byron Bay', location: 'Butler Street Reserve, Byron Bay', hours: '7h00-11h00', description: 'Marché fermier local avec producteurs bio', price: 'Gratuit', type: 'market', officialUrl: 'https://www.byronfarmersmarket.com.au', mustSee: false, lat: -28.6437, lng: 153.6120 },
-  { name: 'Airlie Beach Markets', date: '10 mai (samedi)', city: 'Airlie Beach', location: 'Airlie Beach Foreshore', hours: '7h00-13h00', description: 'Marché artisanal avec produits locaux et artisanat', price: 'Gratuit', type: 'market', officialUrl: 'https://www.airliebeach.com', mustSee: false, lat: -20.2690, lng: 148.7180 },
-  { name: 'The Channon Market', date: '11 mai (dimanche)', city: 'The Channon (près Nimbin)', location: 'Coronation Park, The Channon', hours: '8h00-14h00', description: 'Marché hippie artisanal dans la forêt (2e dimanche du mois)', price: 'Gratuit', type: 'market', officialUrl: 'https://www.thechannonmarket.org.au', mustSee: true, lat: -28.6800, lng: 153.2300 },
-  { name: 'Début saison des baleines', date: 'Mi-mai à novembre', city: 'Toute la côte est', location: 'Pat Morton Lookout, Cape Byron Lighthouse', hours: 'Toute la journée', description: 'Les baleines à bosse commencent leur migration vers le nord. Observation gratuite depuis la côte.', price: 'Gratuit (depuis la côte)', type: 'nature', officialUrl: 'https://www.visitnsw.com/things-to-do/nature-and-parks/whale-watching', mustSee: true, lat: -28.7990, lng: 153.5900 },
-  { name: 'Sunset Cinema Byron Bay', date: 'Mai (vérifier dates)', city: 'Byron Bay', location: 'Byron Bay Recreation Grounds', hours: '19h00-22h00', description: 'Cinéma en plein air sur la plage — films indépendants et classiques', price: '$18-25', type: 'festival', officialUrl: 'https://www.sunsetcinema.com.au/byron-bay', mustSee: false, lat: -28.6437, lng: 153.6120 },
+  { name: 'Byron Farmers Market', date: '1 mai (jeudi)', city: 'Byron Bay', location: 'Butler Street Reserve, Byron Bay', hours: '7h00-11h00', description: 'Marché fermier local avec producteurs bio de la région', price: 'Gratuit', type: 'market', officialUrl: 'https://www.byronfarmersmarket.com.au', image: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=300&h=200&fit=crop', mustSee: true, lat: -28.6437, lng: 153.6120 },
+  { name: 'Nimbin MardiGrass', date: '2-4 mai (ven-dim)', city: 'Nimbin', location: 'Nimbin Community Centre & rues de Nimbin', hours: '10h00-22h00', description: 'Festival annuel emblématique de Nimbin — musique, parades, culture alternative', price: 'Gratuit', type: 'festival', officialUrl: 'https://www.nimbinmardigrass.com', image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=300&h=200&fit=crop', mustSee: true, lat: -28.5960, lng: 153.2230 },
+  { name: 'Byron Community Market', date: '4 mai (dimanche)', city: 'Byron Bay', location: 'Butler Street Reserve, Byron Bay', hours: '8h00-15h00', description: 'Grand marché artisanal mensuel (1er dimanche du mois)', price: 'Gratuit', type: 'market', officialUrl: 'https://www.byronmarkets.com.au', image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=300&h=200&fit=crop', mustSee: true, lat: -28.6437, lng: 153.6120 },
+  { name: 'Byron Farmers Market', date: '8 mai (jeudi)', city: 'Byron Bay', location: 'Butler Street Reserve, Byron Bay', hours: '7h00-11h00', description: 'Marché fermier local avec producteurs bio', price: 'Gratuit', type: 'market', officialUrl: 'https://www.byronfarmersmarket.com.au', image: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=300&h=200&fit=crop', mustSee: false, lat: -28.6437, lng: 153.6120 },
+  { name: 'Airlie Beach Markets', date: '10 mai (samedi)', city: 'Airlie Beach', location: 'Airlie Beach Foreshore', hours: '7h00-13h00', description: 'Marché artisanal avec produits locaux et artisanat', price: 'Gratuit', type: 'market', officialUrl: 'https://www.airliebeach.com', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&h=200&fit=crop', mustSee: false, lat: -20.2690, lng: 148.7180 },
+  { name: 'The Channon Market', date: '11 mai (dimanche)', city: 'The Channon (près Nimbin)', location: 'Coronation Park, The Channon', hours: '8h00-14h00', description: 'Marché hippie artisanal dans la forêt (2e dimanche du mois)', price: 'Gratuit', type: 'market', officialUrl: 'https://www.thechannonmarket.org.au', image: 'https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=300&h=200&fit=crop', mustSee: true, lat: -28.6800, lng: 153.2300 },
+  { name: 'Début saison des baleines', date: 'Mi-mai à novembre', city: 'Toute la côte est', location: 'Pat Morton Lookout, Cape Byron Lighthouse', hours: 'Toute la journée', description: 'Les baleines à bosse commencent leur migration vers le nord. Observation gratuite depuis la côte.', price: 'Gratuit (depuis la côte)', type: 'nature', officialUrl: 'https://www.visitnsw.com/things-to-do/nature-and-parks/whale-watching', image: 'https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=300&h=200&fit=crop', mustSee: true, lat: -28.7990, lng: 153.5900 },
+  { name: 'Sunset Cinema Byron Bay', date: 'Mai (vérifier dates)', city: 'Byron Bay', location: 'Byron Bay Recreation Grounds', hours: '19h00-22h00', description: 'Cinéma en plein air sur la plage — films indépendants et classiques', price: '$18-25', type: 'festival', officialUrl: 'https://www.sunsetcinema.com.au/byron-bay', image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=300&h=200&fit=crop', mustSee: false, lat: -28.6437, lng: 153.6120 },
 ]
 
 export const pois: POI[] = [
