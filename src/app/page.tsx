@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { ConfirmeTab, ItineraireTab, VillesTab, BudgetTab, VolsTab, VehiculesTab, EvenementsTab, CarteTab, ResumeTab, PackingTab, MeteoTab } from '@/components/Tabs'
+import { ConfirmeTab, ItineraireTab, VillesTab, BudgetTab, VolsTab, VehiculesTab, EvenementsTab, CarteTab, ResumeTab, PackingTab, MeteoTab, InsoliteTab } from '@/components/Tabs'
 
 const tabs = [
   { id: 'confirme', label: 'Confirme', icon: '✅' },
@@ -11,6 +11,7 @@ const tabs = [
   { id: 'vehicules', label: 'Vehicules', icon: '🚐' },
   { id: 'evenements', label: 'Events', icon: '📅' },
   { id: 'carte', label: 'Carte', icon: '📍' },
+  { id: 'insolite', label: 'Insolite', icon: '🤯' },
   { id: 'meteo', label: 'Meteo', icon: '🌤' },
   { id: 'packing', label: 'Valise', icon: '🎒' },
   { id: 'resume', label: 'Resume', icon: '📋' },
@@ -88,6 +89,7 @@ export default function Home() {
         {activeTab === 'vehicules' && <VehiculesTab />}
         {activeTab === 'evenements' && <EvenementsTab />}
         {activeTab === 'carte' && <CarteTab />}
+        {activeTab === 'insolite' && <InsoliteTab />}
         {activeTab === 'meteo' && <MeteoTab />}
         {activeTab === 'packing' && <PackingTab />}
         {activeTab === 'resume' && <ResumeTab />}

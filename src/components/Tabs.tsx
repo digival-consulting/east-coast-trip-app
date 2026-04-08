@@ -938,6 +938,118 @@ export function CarteTab() {
   )
 }
 
+// ==================== INSOLITE ====================
+type StoryCategory = 'astuce' | 'insolite' | 'rencontre' | 'fail' | 'secret'
+interface Story { title: string; text: string; location: string; region: 'byron' | 'brisbane' | 'fraser' | 'whitsundays'; category: StoryCategory; image: string }
+
+const categoryStyles: Record<StoryCategory, { label: string; color: string; icon: string }> = {
+  astuce: { label: 'Astuce locale', color: 'bg-green-100 text-green-700', icon: '💡' },
+  insolite: { label: 'Insolite', color: 'bg-purple-100 text-purple-700', icon: '🤯' },
+  rencontre: { label: 'Rencontre', color: 'bg-sky-100 text-sky-700', icon: '🐾' },
+  fail: { label: 'Fail', color: 'bg-red-100 text-red-700', icon: '😅' },
+  secret: { label: 'Secret', color: 'bg-amber-100 text-amber-700', icon: '🤫' },
+}
+
+const regionLabels: Record<string, string> = { byron: 'Byron & Northern NSW', brisbane: 'Brisbane', fraser: 'Fraser Island (K\'gari)', whitsundays: 'Whitsundays & Reef' }
+
+const stories: Story[] = [
+  // BYRON REGION
+  { title: 'Le "Byron Bubble" — 3 jours deviennent 3 mois', text: 'Les backpackers appellent ca le "Byron Bubble" : tu arrives pour un weekend de surf et de yoga, et trois mois plus tard tu travailles dans un cafe bio en sarouel. L\'Arts Factory Lodge est le ground zero de ce phenomene — un ancien piggery transforme en village backpacker avec hamacs, tipis et feux de camp.', location: 'Byron Bay — Arts Factory Lodge', region: 'byron', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/A175%2C_Cape_Byron%2C_New_South_Wales%2C_Australia%2C_2007.JPG' },
+  { title: 'Le water dragon voleur de bacon', text: 'Au petit-dej a l\'Arts Factory, un water dragon (lezard d\'un metre) a saute sur la table d\'un backpacker et lui a vole une tranche de bacon directement de son assiette. Les brush turkeys, eux, viennent gratter dans ton sac a dos des que tu tournes le dos. A Byron, la faune locale n\'a aucun respect pour ton brunch.', location: 'Byron Bay — Arts Factory Lodge', region: 'byron', category: 'rencontre', image: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Australian_water_dragon_%28Physignathus_lesueurii%29.jpg' },
+  { title: 'Sunrise au phare — le vrai hack local', text: 'La majorite des touristes visitent le Cape Byron Lighthouse en plein apres-midi avec mille selfie sticks. Les locaux y vont au lever du soleil : la lumiere est magique, l\'air est frais, et tu as des chances de voir des dauphins ou des baleines depuis le point le plus a l\'est de l\'Australie.', location: 'Byron Bay — Cape Byron Lighthouse', region: 'byron', category: 'astuce', image: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Byron_Bay_Lighthouse.JPG' },
+  { title: 'Whites Beach — la plage que personne ne te dit', text: 'Sable blanc immacule, eau cristalline, entouree de bush — et presque personne. L\'acces demande une petite marche sur un sentier a travers la vegetation, ce qui filtre naturellement les foules. Les locaux y vont quand Main Beach est un zoo et ne partagent pas le spot facilement.', location: 'Byron Bay — Whites Beach', region: 'byron', category: 'secret', image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Clarkes_Beach.jpg' },
+  { title: 'Les cookies de Nimbin — la lecon du "Big Al"', text: 'Chaque tour guide a Nimbin previent : "Ne mange qu\'une moitie du cookie, et attends 45 minutes." Big Al a decide d\'en avaler un entier d\'un coup. Resultat : completement hors service pendant des heures. Le guide raconte avoir vu "des gros gaillards avaler une poignee de cookies en rigolant, pour finir en pleurs une heure plus tard".', location: 'Nimbin — Main Street', region: 'byron', category: 'fail', image: 'https://upload.wikimedia.org/wikipedia/commons/5/5b/Nimbin_main_street_February_2014_%281%29.jpg' },
+  { title: 'Nimbin — la ville qui a sauve une foret', text: 'En 1979, la communaute hippie de Nimbin a organise la "Battle of Terania Creek" pour proteger la derniere foret tropicale locale. Resultat : le gouvernement du NSW a impose la toute premiere legislation au monde interdisant l\'exploitation forestiere en foret tropicale. Ces hippies en sarouel ont litteralement fait l\'histoire.', location: 'Nimbin — Terania Creek', region: 'byron', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Nimbin_Rocks.JPG' },
+  { title: 'Les vers luisants de Natural Bridge — magie gratuite', text: 'A la tombee de la nuit, tu descends un sentier d\'un kilometre a travers une foret du Gondwana vieille de millions d\'annees. Dans la grotte sous la cascade, des milliers de vers luisants illuminent la voute comme un ciel etoile. C\'est gratuit, ouvert 24h. Regle d\'or : aucune lampe dans la grotte, sinon ils arretent de briller.', location: 'Springbrook National Park — Natural Bridge', region: 'byron', category: 'secret', image: 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Natural_Bridge%2C_Springbrook_National_Park%2C_Queensland_-_Cave_Creek.JPG' },
+  { title: 'Crystal Castle — l\'amethyste de 20 tonnes', text: 'Tu peux t\'asseoir a l\'interieur d\'une grotte d\'amethyste de 5,5m pesant 20 000 kg. Les "Crystal Guardians" sont les plus grandes geodes du monde. A midi, une session de Crystal Singing Bowls te plonge dans un etat meditatif inattendu — meme les sceptiques repartent troubles. Le Stupa de la Paix a ete beni par le Dalai Lama.', location: 'Byron Bay Hinterland — Crystal Castle', region: 'byron', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Basalt_columns%2C_Fingal_Head%2C_New_South_Wales.jpg' },
+  { title: 'Lake Ainsworth — le bain de tea tree sacre', text: 'Les locaux appellent ca "Tea Tree Lake" : un lac d\'eau douce couleur the, infuse par les Melaleuca. Tu te baignes dedans et ta peau est douce pendant des jours. Le lieu est sacre pour les Bundjalung, le peuple aborigene local, qui considere que les esprits des ancetres vivent dans ses eaux sombres.', location: 'Lennox Head — Lake Ainsworth', region: 'byron', category: 'secret', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Lake_Ainsworth_-_panoramio.jpg' },
+  { title: 'Fingal Head — la Giant\'s Causeway australienne', text: 'Des colonnes de basalte hexagonales formees il y a 23 millions d\'annees emergent de l\'ocean comme une version australienne de la Giant\'s Causeway. Juste a cote, Dreamtime Beach est classee parmi les plus belles du NSW — et elle est quasi deserte car tout le monde reste sur la Gold Coast a 20 min.', location: 'Fingal Head — Basalt Causeway', region: 'byron', category: 'secret', image: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Basalt_columns%2C_Fingal_Head%2C_New_South_Wales.jpg' },
+  { title: 'Suffolk Park Bakery — le breakfast hack', text: 'Les locaux ne vont pas au centre de Byron pour le petit-dej. Ils vont a la Suffolk Park Bakery : meat pies incroyables, croissants parfaits. Tu prends ton cafe, tu marches 5 min jusqu\'a Tallow Beach, et tu as un breakfast 5 etoiles vue ocean pour le prix d\'un sandwich. Pendant ce temps, les touristes paient $28 pour un acai bowl.', location: 'Byron Bay — Suffolk Park / Tallow Beach', region: 'byron', category: 'astuce', image: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Byron_Bay_Main_Beach_Sunset.jpg' },
+  // BRISBANE
+  { title: 'Streets Beach — une plage en plein CBD', text: 'Tu sors du bus en plein centre-ville et tu tombes sur une plage de sable blanc avec lagon turquoise, surveillee par des maitres-nageurs, entouree de gratte-ciels. 80 tonnes de sable blanc sont acheminees chaque annee. L\'eau est chloree et filtree toutes les 6 heures — un luxe apres s\'etre fait malmener par l\'ocean.', location: 'Brisbane — South Bank Parklands', region: 'brisbane', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Streets_Beach_at_South_Bank_Parklands%2C_Brisbane_03.jpg' },
+  { title: 'GOMA — l\'art gratuit qui derange', text: 'Le plus grand musee d\'art moderne d\'Australie, entree gratuite. Les backpackers tombent sur l\'Infinity Room (salle de miroirs infinis) ou les sculptures hyperrealistes geantes de Ron Mueck — une femme de 5 metres dans un lit qui te fixe. Meme les lavabos des toilettes integrent des oeuvres d\'art.', location: 'Brisbane — Gallery of Modern Art', region: 'brisbane', category: 'secret', image: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Queensland_Gallery_of_Modern_Art_at_dusk%2C_Brisbane%2C_2019.jpg' },
+  { title: 'Les Bin Chickens — l\'oiseau le plus deteste d\'Australie', text: 'L\'ibis blanc, surnomme "bin chicken" (poulet de poubelle), fouille les poubelles et vole la bouffe des touristes. Depuis 2024, un artiste local a installe plus de 200 sculptures d\'ibis en metal dans Brisbane — certaines tiennent une biere. Le "Bin Chicken Trail" est devenu une attraction touristique officielle.', location: 'Brisbane — partout (Bin Chicken Trail)', region: 'brisbane', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Australian_White_Ibis%2C_Threskiornis_molucca.jpg' },
+  { title: 'Lone Pine — le face-a-face koala (sans calin)', text: 'Le plus ancien sanctuaire de koalas au monde (1927). Depuis juillet 2024, tu ne peux plus tenir un koala dans tes bras. Le "Koala Moment" te met face a face avec un koala dans son arbre — 5 minutes intenses. L\'autre moment fort : le champ de kangourous en liberte, sans barrieres, ou tu les nourris a la main.', location: 'Brisbane — Lone Pine Koala Sanctuary', region: 'brisbane', category: 'rencontre', image: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/A233%2C_Lone_Pine_Koala_Sanctuary%2C_Queensland%2C_Australia%2C_koala%2C_2007.JPG' },
+  { title: 'Le "Brown Snake" et le ferry gratuit', text: 'Tous les backpackers ont la meme reaction : "Pourquoi elle est marron ?!" Les locaux appellent la Brisbane River "The Brown Snake". L\'astuce : le CityHopper ferry est entierement gratuit sur le troncon central. Le CityCat payant fait une boucle complete — reste dessus sans descendre et tu as une croisiere panoramique pour le prix d\'un ticket de bus.', location: 'Brisbane — CityHopper / CityCat', region: 'brisbane', category: 'astuce', image: 'https://upload.wikimedia.org/wikipedia/commons/8/8b/CityCat_Spirit_of_Brisbane_from_CityCat_Walan_Shafston_Reach_Brisbane_River_P1230656.jpg' },
+  // FRASER ISLAND
+  { title: 'Les dingos nocturnes du campement', text: 'Les campements sont entoures de clotures anti-dingos, mais ca n\'empeche pas les dingos de roder toute la nuit. Des voyageurs racontent des grattements sur leur tente a 3h du matin et des empreintes au lever du soleil. Regle absolue : ne JAMAIS laisser de nourriture dehors. Ces animaux sont sauvages et potentiellement dangereux.', location: 'K\'gari — Campements', region: 'fraser', category: 'rencontre', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Dingo_auf_Fraser_Island.JPG' },
+  { title: 'Le 4x4 qui flotte — maree montante sur 75 Mile Beach', text: 'Un groupe a fait demi-tour sur 75 Mile Beach et le 4x4 s\'est enlise dans le sable mou juste quand la maree montait. L\'eau est montee trop vite et le vehicule a litteralement flotte puis coule sous les vagues. Morale : TOUJOURS verifier la table des marees avant de rouler sur la plage.', location: 'K\'gari — 75 Mile Beach', region: 'fraser', category: 'fail', image: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Fraser_Island_a_702.jpg' },
+  { title: 'Lake McKenzie — "C\'est pas reel"', text: 'Chaque backpacker qui arrive a Lake McKenzie a la meme reaction. L\'eau est si cristalline qu\'on voit le fond a plusieurs metres, avec des teintes saphir et turquoise. Le sable blanc est de la silice pure, si fine qu\'elle peut servir de gommage naturel pour la peau et meme nettoyer des bijoux en argent ternis.', location: 'K\'gari — Lake McKenzie', region: 'fraser', category: 'astuce', image: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Minyon_Falls.jpg' },
+  { title: 'L\'avion qui atterrit devant ton 4x4', text: '75 Mile Beach sert officiellement de piste d\'atterrissage pour les vols panoramiques. Les backpackers en convoi 4x4 decrivent le moment surreal ou un petit avion arrive en rase-mottes et se pose directement devant leur vehicule sur la plage, avec les vagues a quelques metres.', location: 'K\'gari — 75 Mile Beach (piste aerienne)', region: 'fraser', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Fraser_Island_a_702.jpg' },
+  { title: 'L\'epave du SS Maheno — fantome de rouille', text: 'Construit en 1905, navire-hopital pendant la Premiere Guerre mondiale. En 1935, un cyclone a casse le cable de remorquage et il a derive avec 8 hommes a bord pour s\'echouer sur la plage. Ses restes rouilles emergent du sable comme un squelette. Les guides disent que chaque annee il disparait un peu plus sous le sable.', location: 'K\'gari — SS Maheno Wreck', region: 'fraser', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/5/58/A216%2C_Great_Sandy_National_Park%2C_Australia%2C_Fraser_Island%2C_Maheno_shipwreck%2C_2007.JPG' },
+  { title: 'Eli Creek — la lazy river des backpackers', text: 'Eli Creek deverse 4 millions de litres d\'eau douce cristalline dans l\'ocean chaque heure. Les backpackers se laissent porter par le courant comme dans une lazy river naturelle. L\'astuce : y aller tot le matin (avant 9h). A partir de midi, ca se transforme en pool party avec bieres flottantes.', location: 'K\'gari — Eli Creek', region: 'fraser', category: 'secret', image: 'https://upload.wikimedia.org/wikipedia/commons/3/37/Eli_Creek_estuary%2C_Fraser_Island%2C_QLD.JPG' },
+  { title: 'Les Champagne Pools — le jacuzzi naturel', text: 'Des bassins de roche volcanique ou les vagues se fracassent par-dessus, creant un effet de bulles de champagne. Seul endroit de l\'ile ou nager dans l\'eau salee est sur. Piege : a maree haute tu ne vois que des vagues. L\'astuce : verifier les tables de maree et y aller a maree basse.', location: 'K\'gari — Champagne Pools', region: 'fraser', category: 'astuce', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Dingo_auf_Fraser_Island.JPG' },
+  // WHITSUNDAYS
+  { title: 'Le sable qui grille ton telephone', text: 'Le sable de Whitehaven Beach est compose a 98,9% de silice pure — tellement fin qu\'il ne retient aucune chaleur (pieds nus en plein midi, pas de brulure). Par contre, cette poudre s\'infiltre dans tous les appareils electroniques : plusieurs backpackers ont grille leur objectif photo ou bloque le port USB de leur telephone en une journee.', location: 'Whitehaven Beach', region: 'whitsundays', category: 'astuce', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/2020-12-20_Cabarita_Beach.jpg' },
+  { title: 'Hill Inlet — la maree qui peint des tableaux', text: 'A Hill Inlet Lookout, les courants melangent le sable blanc et l\'eau turquoise en motifs tourbillonnants qui changent toutes les heures. Tous les voyageurs laissent echapper un "WOW" collectif. L\'astuce des skippers : viser la mi-maree descendante (pas la maree basse) pour les motifs les plus spectaculaires.', location: 'Whitehaven Beach — Hill Inlet', region: 'whitsundays', category: 'secret', image: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Best_Of_All_Lookout_Springbrook_National_Park.JPG' },
+  { title: 'Le party boat de la misere', text: 'Sur un voilier "party boat" avec vingt passagers, presque tous vomissaient par-dessus bord sauf un Francais et un Irlandais. Les deux se sont regarde et ont eclate de rire, entoures de quinze filles allemandes hors combat. Lecon des skippers : prendre un Kwell AVANT de monter a bord, pas quand ca tangue deja.', location: 'Whitsunday Islands — en mer', region: 'whitsundays', category: 'fail', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG' },
+  { title: 'Face a face avec "Crush" la tortue', text: 'Tu nages au-dessus du corail et soudain une tortue verte d\'un metre apparait a cote de toi, completement indifferente. Une voyageuse raconte que sa fille est remontee en criant "J\'ai nage avec Crush !" (le personnage de Nemo). L\'astuce : ne jamais nager directement vers la tortue, mais dans la meme direction — elle te laissera l\'accompagner.', location: 'Great Barrier Reef — Hardy Reef', region: 'whitsundays', category: 'rencontre', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Snapper_Rocks%2C_Coolangatta%2C_Australia_%28Unsplash%29.jpg' },
+  { title: 'Le lagon d\'Airlie — piscine anti-croco', text: 'Airlie Beach a une piscine municipale de 4 000 m2, gratuite, vue mer de Corail. Construite parce que la baignade en mer est deconseille a cause des meduses-boites et des crocodiles d\'eau salee. Backpackers, familles et locaux se retrouvent tous dans ce lagon au centre-ville, biere a la main, coucher de soleil sur les iles.', location: 'Airlie Beach — Lagoon', region: 'whitsundays', category: 'astuce', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG' },
+  { title: 'La combinaison Power Ranger anti-meduse', text: 'D\'octobre a mai, chaque operateur fournit un "stinger suit" — combinaison integrale en lycra contre les Irukandji et box jellyfish. Tu ressembles a un Power Ranger aquatique. Les backpackers postent des photos de groupe hilarantes. Mais personne ne plaisante avec les Irukandji — une piqure peut envoyer aux urgences.', location: 'Whitsundays — toutes les sorties en mer', region: 'whitsundays', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG' },
+  { title: 'Heart Reef — le recif ou on demande en mariage', text: 'Formation corallienne naturellement en forme de coeur, decouverte en 1975. C\'est devenu LE spot de demande en mariage en Australie : les pilotes sont briefes pour faire plusieurs passages pendant que le passager sort la bague. Heart Reef ne peut etre vu QUE depuis les airs — interdit d\'y plonger pour proteger le corail.', location: 'Heart Reef — Hardy Reef', region: 'whitsundays', category: 'insolite', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG' },
+  { title: 'Premiere plongee PADI — zero communication', text: 'Tu passes des heures a apprendre les signes sous-marins (OK, probleme, monter, descendre). A 10 metres de profondeur face a un mur de coraux et un banc de poissons-clowns, tu oublies absolument tout. Un debutant a fait le signe "requin" (main sur la tete) au lieu de "OK", provoquant une panique generale. En surface, tout le monde a eclate de rire.', location: 'Great Barrier Reef — centre PADI', region: 'whitsundays', category: 'fail', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG' },
+]
+
+export function InsoliteTab() {
+  const [regionFilter, setRegionFilter] = useState<string>('all')
+  const [categoryFilter, setCategoryFilter] = useState<string>('all')
+
+  const filtered = stories.filter(s =>
+    (regionFilter === 'all' || s.region === regionFilter) &&
+    (categoryFilter === 'all' || s.category === categoryFilter)
+  )
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">Recits de backpackers & anecdotes insolites</h2>
+      <p className="text-slate-500 text-sm">{stories.length} histoires vraies collectees aupres de voyageurs, forums et blogs. Classees par region et par type.</p>
+
+      {/* Filtres */}
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-1.5">
+          <button onClick={() => setRegionFilter('all')} className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${regionFilter === 'all' ? 'bg-slate-700 text-white border-slate-700' : 'border-slate-200 text-slate-500'}`}>Toutes les regions</button>
+          {Object.entries(regionLabels).map(([key, label]) => (
+            <button key={key} onClick={() => setRegionFilter(key)} className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${regionFilter === key ? 'bg-sky-500 text-white border-sky-500' : 'border-slate-200 text-slate-500'}`}>{label}</button>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          <button onClick={() => setCategoryFilter('all')} className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${categoryFilter === 'all' ? 'bg-slate-700 text-white border-slate-700' : 'border-slate-200 text-slate-500'}`}>Tous les types</button>
+          {Object.entries(categoryStyles).map(([key, cfg]) => (
+            <button key={key} onClick={() => setCategoryFilter(key)} className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${categoryFilter === key ? cfg.color + ' border-current font-medium' : 'border-slate-200 text-slate-500'}`}>{cfg.icon} {cfg.label}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="text-xs text-slate-400">{filtered.length} histoire{filtered.length > 1 ? 's' : ''}</div>
+
+      {/* Stories */}
+      <div className="space-y-4">
+        {filtered.map((s, i) => {
+          const cat = categoryStyles[s.category]
+          return (
+            <div key={i} className="border rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow">
+              <div className="flex flex-col md:flex-row">
+                <div className="w-full md:w-48 h-40 md:h-auto shrink-0 bg-slate-100">
+                  <img src={s.image} alt={s.title} className="w-full h-full object-cover" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                </div>
+                <div className="flex-1 p-4">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${cat.color}`}>{cat.icon} {cat.label}</span>
+                    <span className="text-xs text-slate-400">{regionLabels[s.region]}</span>
+                  </div>
+                  <h3 className="font-bold text-base mb-1">{s.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{s.text}</p>
+                  <div className="mt-2 text-xs text-slate-400">📍 {s.location}</div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // ==================== METEO ====================
 const weatherData = [
   { city: 'Gold Coast', temp: '20-25', water: '23', rain: '80mm (5j)', uv: 'Modéré', note: 'Doux et ensoleillé, parfait pour la plage' },
