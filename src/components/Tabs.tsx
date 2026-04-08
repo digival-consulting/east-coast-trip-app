@@ -43,52 +43,73 @@ function WarningTooltip({ text }: { text: string }) {
 
 // ==================== CONFIRMÉ ====================
 const confirmedPart1 = [
-  { day: 'J0 — 30 avr', title: 'Vol Sydney → Gold Coast', camp: '—', campPrice: 0, activities: [
-    { name: 'Vol Jetstar SYD→OOL 07h00', price: 49, status: 'confirme' as const },
-    { name: 'Pickup campervan Gold Coast Airport', price: 0, status: 'confirme' as const },
-    { name: 'Installation + courses supermarche', price: 60, status: 'estime' as const },
+  { day: 'J0 — 30 avr', title: 'Vol Sydney → Gold Coast', camp: '—', campPrice: 0, campUrl: '', activities: [
+    { name: 'Vol Jetstar SYD→OOL 07h00', price: 49, status: 'confirme' as const, url: 'https://www.jetstar.com' },
+    { name: 'Pickup campervan Gold Coast Airport', price: 0, status: 'confirme' as const, url: 'https://www.camplify.com.au/rv/152484' },
+    { name: 'Installation + courses supermarche', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J1 — 1 mai', title: 'Gold Coast / Burleigh Heads', camp: 'BIG4 Gold Coast Holiday Park', campPrice: 50, activities: [
-    { name: 'Burleigh Heads National Park (rando)', price: 0, status: 'estime' as const },
-    { name: 'Tallebudgera Creek (baignade)', price: 0, status: 'estime' as const },
-    { name: 'Byron Farmers Market (matin tot)', price: 0, status: 'estime' as const },
-    { name: 'Repas midi + soir', price: 60, status: 'estime' as const },
+  { day: 'J1 — 1 mai', title: 'Gold Coast / Burleigh Heads', camp: 'BIG4 Gold Coast Holiday Park', campPrice: 50, campUrl: 'https://www.big4.com.au/caravan-parks/qld/gold-coast/gold-coast-holiday-park', activities: [
+    { name: 'Burleigh Heads National Park (rando)', price: 0, status: 'estime' as const, url: 'https://parks.des.qld.gov.au/parks/burleigh-head' },
+    { name: 'Tallebudgera Creek (baignade)', price: 0, status: 'estime' as const, url: 'https://www.goldcoast.com.au/things-to-do/tallebudgera-creek' },
+    { name: 'Byron Farmers Market (matin tot)', price: 0, status: 'estime' as const, url: 'https://www.byronfarmersmarket.com.au' },
+    { name: 'Repas midi + soir', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J2 — 2 mai', title: 'Springbrook → Byron Bay', camp: 'Broken Head Holiday Park', campPrice: 50, activities: [
-    { name: 'Natural Bridge (Springbrook NP)', price: 0, status: 'estime' as const },
-    { name: 'Best of All Lookout', price: 0, status: 'estime' as const },
-    { name: 'Sunset a The Pass, Byron Bay', price: 0, status: 'estime' as const },
-    { name: 'Repas', price: 60, status: 'estime' as const },
+  { day: 'J2 — 2 mai', title: 'Springbrook → Byron Bay', camp: 'Broken Head Holiday Park', campPrice: 50, campUrl: 'https://www.brokenheadholidaypark.com.au', activities: [
+    { name: 'Natural Bridge (Springbrook NP)', price: 0, status: 'estime' as const, url: 'https://parks.des.qld.gov.au/parks/springbrook' },
+    { name: 'Best of All Lookout', price: 0, status: 'estime' as const, url: 'https://parks.des.qld.gov.au/parks/springbrook' },
+    { name: 'Sunset a The Pass, Byron Bay', price: 0, status: 'estime' as const, url: 'https://www.visitbyronbay.com' },
+    { name: 'Repas', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J3 — 3 mai', title: 'Byron Bay', camp: 'First Sun Holiday Park', campPrice: 60, activities: [
-    { name: 'Cape Byron Lighthouse walk (sunrise)', price: 0, status: 'estime' as const },
-    { name: 'Cours de surf 2h', price: 70, status: 'estime' as const },
-    { name: 'Kayak avec dauphins', price: 75, status: 'estime' as const },
-    { name: 'Repas', price: 60, status: 'estime' as const },
+  { day: 'J3 — 3 mai', title: 'Byron Bay', camp: 'First Sun Holiday Park', campPrice: 60, campUrl: 'https://www.firstsunholidaypark.com.au', activities: [
+    { name: 'Cape Byron Lighthouse walk (sunrise)', price: 0, status: 'estime' as const, url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/cape-byron-walking-track' },
+    { name: 'Cours de surf 2h', price: 70, status: 'estime' as const, url: 'https://mojosurf.com/byron-bay' },
+    { name: 'Kayak avec dauphins', price: 75, status: 'estime' as const, url: 'https://www.capebayronkayaks.com' },
+    { name: 'Repas', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J4 — 4 mai', title: 'Nimbin & Cascades', camp: 'First Sun Holiday Park', campPrice: 60, activities: [
-    { name: 'Nimbin village (MardiGrass weekend)', price: 0, status: 'estime' as const },
-    { name: 'Minyon Falls rando', price: 0, status: 'estime' as const },
-    { name: 'Protesters Falls', price: 0, status: 'estime' as const },
-    { name: 'Repas', price: 60, status: 'estime' as const },
+  { day: 'J4 — 4 mai', title: 'Nimbin & Cascades', camp: 'First Sun Holiday Park', campPrice: 60, campUrl: 'https://www.firstsunholidaypark.com.au', activities: [
+    { name: 'Nimbin village (MardiGrass weekend)', price: 0, status: 'estime' as const, url: 'https://www.nimbinmardigrass.com' },
+    { name: 'Minyon Falls rando', price: 0, status: 'estime' as const, url: 'https://www.nationalparks.nsw.gov.au/things-to-do/lookouts/minyon-falls-lookout' },
+    { name: 'Protesters Falls', price: 0, status: 'estime' as const, url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/protesters-falls-walk' },
+    { name: 'Repas', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J5 — 5 mai', title: 'Crystal Castle & Plages', camp: 'Kingscliff Beach Holiday Park', campPrice: 50, activities: [
-    { name: 'Crystal Castle & Shambhala Gardens', price: 35, status: 'estime' as const },
-    { name: 'Cabarita Beach surf/detente', price: 0, status: 'estime' as const },
-    { name: 'Fingal Head Lighthouse', price: 0, status: 'estime' as const },
-    { name: 'Repas', price: 60, status: 'estime' as const },
+  { day: 'J5 — 5 mai', title: 'Crystal Castle & Plages', camp: 'Kingscliff Beach Holiday Park', campPrice: 50, campUrl: 'https://www.kingscliffbeachholidaypark.com.au', activities: [
+    { name: 'Crystal Castle & Shambhala Gardens', price: 35, status: 'estime' as const, url: 'https://crystalcastle.com.au' },
+    { name: 'Cabarita Beach surf/detente', price: 0, status: 'estime' as const, url: 'https://www.visitnsw.com/destinations/north-coast/tweed-area/cabarita-beach' },
+    { name: 'Fingal Head Lighthouse', price: 0, status: 'estime' as const, url: 'https://www.visitnsw.com/destinations/north-coast/tweed-area/fingal-head' },
+    { name: 'Repas', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J6 — 6 mai', title: 'Lennox Head & Cote sud', camp: 'Lennox Head Reflections', campPrice: 50, activities: [
-    { name: 'Pat Morton Lookout', price: 0, status: 'estime' as const },
-    { name: 'Lake Ainsworth (tea-tree)', price: 0, status: 'estime' as const },
-    { name: 'Lennox Head surf', price: 0, status: 'estime' as const },
-    { name: 'Repas', price: 60, status: 'estime' as const },
+  { day: 'J6 — 6 mai', title: 'Lennox Head & Cote sud', camp: 'Lennox Head Reflections', campPrice: 50, campUrl: 'https://www.reflectionsholidayparks.com.au/park/lennox-head', activities: [
+    { name: 'Pat Morton Lookout', price: 0, status: 'estime' as const, url: 'https://www.visitnsw.com/destinations/north-coast/ballina-area/lennox-head' },
+    { name: 'Lake Ainsworth (tea-tree)', price: 0, status: 'estime' as const, url: 'https://www.visitnsw.com/destinations/north-coast/ballina-area/lennox-head/attractions/lake-ainsworth' },
+    { name: 'Lennox Head surf', price: 0, status: 'estime' as const, url: 'https://www.visitnsw.com/destinations/north-coast/ballina-area/lennox-head' },
+    { name: 'Repas', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J7 — 7 mai', title: 'Retour Gold Coast → Brisbane', camp: '—', campPrice: 0, activities: [
-    { name: 'Coolangatta / Snapper Rocks (matin)', price: 0, status: 'estime' as const },
-    { name: 'Drive Gold Coast → Brisbane (1h)', price: 0, status: 'estime' as const },
-    { name: 'Brisbane : South Bank, GOMA, Eat Street', price: 30, status: 'estime' as const },
-    { name: 'Repas Brisbane', price: 70, status: 'estime' as const },
+  { day: 'J7 — 7 mai', title: 'Retour Gold Coast → Brisbane', camp: '—', campPrice: 0, campUrl: '', activities: [
+    { name: 'Coolangatta / Snapper Rocks (matin)', price: 0, status: 'estime' as const, url: 'https://www.goldcoast.com.au/things-to-do/coolangatta' },
+    { name: 'Drive Gold Coast → Brisbane (1h)', price: 0, status: 'estime' as const, url: '' },
+    { name: 'Brisbane : South Bank, GOMA, Eat Street', price: 30, status: 'estime' as const, url: 'https://www.visitbrisbane.com.au/south-bank' },
+    { name: 'Repas Brisbane', price: 70, status: 'estime' as const, url: '' },
+  ]},
+]
+
+const bookingUrgencies = [
+  { priority: 'URGENT', color: 'bg-red-500', items: [
+    { what: 'Vol Jetstar SYD→OOL 30 avril', when: 'Reserver MAINTENANT', why: 'Prix augmentent chaque semaine, places limitees en early morning', url: 'https://www.jetstar.com' },
+    { what: 'Campervan Camplify', when: 'Reserver MAINTENANT', why: 'Saison haute, les bons vans partent en 48h', url: 'https://www.camplify.com.au/rv/152484' },
+    { what: 'Tour Fraser Island 2j/1n', when: 'Avant le 15 avril', why: 'Tours complets 2-3 semaines avant en mai', url: 'https://www.cooldingo.com.au' },
+  ]},
+  { priority: 'BIENTOT', color: 'bg-amber-500', items: [
+    { what: 'Liveaboard Whitsundays + PADI', when: '2-3 semaines avant (mi-avril)', why: 'Places PADI limitees a 4-6 par bateau', url: 'https://www.wingsdiving.com.au' },
+    { what: 'Vol BNE→PPP', when: '2-3 semaines avant', why: 'Peu de vols directs, prix doublent a J-7', url: 'https://www.jetstar.com' },
+    { what: 'Vol PPP→SYD retour', when: '2-3 semaines avant', why: 'Meme raison — segment peu desservi', url: 'https://www.jetstar.com' },
+    { what: 'Hostel Airlie Beach', when: '2-3 semaines avant', why: 'Nomads et YHA remplissent vite en mai', url: 'https://nomadsworld.com/australia/airlie-beach' },
+  ]},
+  { priority: 'TRANQUILLE', color: 'bg-green-500', items: [
+    { what: 'Holiday Parks Byron region', when: '1-2 semaines avant', why: 'Camping van = flexible, walk-in possible en basse saison', url: 'https://www.big4.com.au' },
+    { what: 'Surf lesson Byron Bay', when: '1 semaine avant ou sur place', why: 'Departs toutes les heures, jamais complet', url: 'https://mojosurf.com/byron-bay' },
+    { what: 'Kayak dauphins Byron', when: '2-3 jours avant', why: 'Reserve en fonction de la meteo', url: 'https://www.capebayronkayaks.com' },
+    { what: 'Crystal Castle', when: 'Sur place', why: 'Billets a l\'entree, jamais complet', url: 'https://crystalcastle.com.au' },
+    { what: 'Bus Greyhound Brisbane→Hervey Bay', when: '1 semaine avant', why: 'Bus frequents, rarement complet', url: 'https://www.greyhound.com.au' },
   ]},
 ]
 
@@ -101,13 +122,13 @@ const fraserSimulation = {
     { day: 'J11 — 11 mai', desc: 'Retour ferry + bus Hervey Bay → Brisbane. Recuperer le van. Drive Brisbane → Gold Coast (1h). Rendu du van.' },
   ],
   costs: [
-    { item: 'Bus Brisbane → Hervey Bay (aller)', price: 55 },
-    { item: 'Hostel Hervey Bay (1 nuit)', price: 45 },
-    { item: 'Tour Fraser Island 2j/1n (Cool Dingo)', price: 480 },
-    { item: 'Bus Hervey Bay → Brisbane (retour)', price: 55 },
-    { item: 'Repas J8 + J11 (hors tour)', price: 80 },
-    { item: 'Essence Brisbane → GC (rendu van)', price: 25 },
-    { item: 'Parking van Brisbane (~3 jours)', price: 45 },
+    { item: 'Bus Brisbane → Hervey Bay (aller)', price: 55, url: 'https://www.greyhound.com.au' },
+    { item: 'Hostel Hervey Bay (1 nuit)', price: 45, url: 'https://www.hostelworld.com/st/hostels/p/30437/colonial-backpackers-yha/' },
+    { item: 'Tour Fraser Island 2j/1n (Cool Dingo)', price: 480, url: 'https://www.cooldingo.com.au' },
+    { item: 'Bus Hervey Bay → Brisbane (retour)', price: 55, url: 'https://www.greyhound.com.au' },
+    { item: 'Repas J8 + J11 (hors tour)', price: 80, url: '' },
+    { item: 'Essence Brisbane → GC (rendu van)', price: 25, url: '' },
+    { item: 'Parking van Brisbane (~3 jours)', price: 45, url: 'https://www.wilsonparking.com.au/park/brisbane' },
   ],
   note: 'Le van reste gare a Brisbane (parking Wilson ou similaire ~$15/j). On fait Fraser en tour organise (4WD, camping, guide, repas inclus). Retour a Brisbane pour recuperer le van et le rendre a Gold Coast.',
 }
@@ -126,13 +147,13 @@ const whitsundaysPadi = {
         'J16 : Vol panoramique Heart Reef (optionnel) + vol PPP→SYD',
       ],
       cost: [
-        { item: 'Vol BNE→PPP (Jetstar)', price: 89 },
-        { item: 'Liveaboard 3j/2n + PADI Open Water (Wings Diving)', price: 850 },
-        { item: 'Hostel Airlie Beach (2 nuits : J12 + J15)', price: 130 },
-        { item: 'Vol panoramique Heart Reef (optionnel)', price: 250 },
-        { item: 'Vol PPP→SYD (Jetstar)', price: 99 },
-        { item: 'Repas (5 jours, hors liveaboard)', price: 180 },
-        { item: 'Navettes aeroport', price: 44 },
+        { item: 'Vol BNE→PPP (Jetstar)', price: 89, url: 'https://www.jetstar.com' },
+        { item: 'Liveaboard 3j/2n + PADI Open Water (Wings Diving)', price: 850, url: 'https://www.wingsdiving.com.au' },
+        { item: 'Hostel Airlie Beach (2 nuits : J12 + J15)', price: 130, url: 'https://nomadsworld.com/australia/airlie-beach' },
+        { item: 'Vol panoramique Heart Reef (optionnel)', price: 250, url: 'https://www.gslaviation.com.au' },
+        { item: 'Vol PPP→SYD (Jetstar)', price: 99, url: 'https://www.jetstar.com' },
+        { item: 'Repas (5 jours, hors liveaboard)', price: 180, url: '' },
+        { item: 'Navettes aeroport', price: 44, url: 'https://www.whitsundaytransit.com.au' },
       ],
       extra: '+2 jours vs plan actuel (4 jours → 5 jours). Retour Sydney le 16 mai au lieu du 11.',
     },
@@ -147,14 +168,14 @@ const whitsundaysPadi = {
         'J16 : Vol panoramique + vol retour PPP→SYD',
       ],
       cost: [
-        { item: 'Vol BNE→PPP', price: 89 },
-        { item: 'PADI Open Water 3 jours (Pro Dive)', price: 650 },
-        { item: 'Ocean Rafting half-day Whitehaven', price: 155 },
-        { item: 'Hostel Airlie Beach (4 nuits)', price: 260 },
-        { item: 'Vol panoramique (optionnel)', price: 250 },
-        { item: 'Vol PPP→SYD', price: 99 },
-        { item: 'Repas (5 jours)', price: 300 },
-        { item: 'Navettes', price: 44 },
+        { item: 'Vol BNE→PPP', price: 89, url: 'https://www.jetstar.com' },
+        { item: 'PADI Open Water 3 jours (Pro Dive)', price: 650, url: 'https://www.prodivewhitsundays.com.au' },
+        { item: 'Ocean Rafting half-day Whitehaven', price: 155, url: 'https://www.oceanrafting.com.au' },
+        { item: 'Hostel Airlie Beach (4 nuits)', price: 260, url: 'https://nomadsworld.com/australia/airlie-beach' },
+        { item: 'Vol panoramique (optionnel)', price: 250, url: 'https://www.gslaviation.com.au' },
+        { item: 'Vol PPP→SYD', price: 99, url: 'https://www.jetstar.com' },
+        { item: 'Repas (5 jours)', price: 300, url: '' },
+        { item: 'Navettes', price: 44, url: 'https://www.whitsundaytransit.com.au' },
       ],
       extra: '+2 jours vs plan actuel. Moins immersif mais PADI + Whitehaven garantis meme si meteo change.',
     },
@@ -216,6 +237,34 @@ export function ConfirmeTab() {
         </div>
       </div>
 
+      {/* Planning reservations */}
+      <div className="border-2 border-red-200 rounded-xl overflow-hidden">
+        <div className="bg-red-50 px-4 py-3 border-b border-red-200">
+          <h3 className="text-lg font-bold text-red-800">Planning de reservation</h3>
+          <p className="text-xs text-red-600">Cadence recommandee pour ne rien louper</p>
+        </div>
+        <div className="divide-y">
+          {bookingUrgencies.map((group, i) => (
+            <div key={i} className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className={`text-xs font-bold px-2 py-0.5 rounded text-white ${group.color}`}>{group.priority}</span>
+              </div>
+              <div className="space-y-2">
+                {group.items.map((item, j) => (
+                  <div key={j} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 text-sm">
+                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="font-medium text-sky-600 hover:underline shrink-0">{item.what} ↗</a>
+                    <span className="text-xs text-slate-400 hidden md:block">—</span>
+                    <span className="text-xs font-medium text-slate-700">{item.when}</span>
+                    <span className="text-xs text-slate-400 hidden md:block">—</span>
+                    <span className="text-xs text-slate-400">{item.why}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Itineraire jour par jour */}
       <div className="space-y-3">
         <h3 className="text-lg font-bold">Itineraire jour par jour (prix moyen, x2 pers)</h3>
@@ -232,20 +281,26 @@ export function ConfirmeTab() {
                 <span className="font-bold text-sky-600">${dayTotal}</span>
               </div>
               {day.camp !== '—' && (
-                <div className="text-sm text-slate-500 mb-2">Nuit : {day.camp} — <span className="font-medium text-slate-700">${day.campPrice}/nuit</span></div>
+                <div className="text-sm text-slate-500 mb-2">
+                  Nuit : {day.campUrl ? <a href={day.campUrl} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">{day.camp} ↗</a> : day.camp} — <span className="font-medium text-slate-700">${day.campPrice}/nuit</span>
+                </div>
               )}
               <div className="space-y-1">
                 {day.activities.map((a, j) => (
-                  <div key={j} className="flex items-center justify-between text-sm py-0.5">
-                    <div className="flex items-center gap-2">
+                  <div key={j} className="flex items-center justify-between text-sm py-0.5 gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
                       {a.status === 'confirme' ? (
-                        <span className="w-2 h-2 rounded-full bg-green-500" />
+                        <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
                       ) : (
-                        <span className="w-2 h-2 rounded-full bg-amber-400" />
+                        <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
                       )}
-                      <span>{a.name}</span>
+                      {a.url ? (
+                        <a href={a.url} target="_blank" rel="noopener noreferrer" className="hover:text-sky-600 hover:underline truncate">{a.name} <span className="text-sky-400">↗</span></a>
+                      ) : (
+                        <span className="truncate">{a.name}</span>
+                      )}
                     </div>
-                    <span className={a.price === 0 ? 'text-green-600' : 'text-slate-600'}>{a.price === 0 ? 'Gratuit' : `$${a.name.includes('Repas') || a.name.includes('courses') ? a.price : a.price * 2}`}</span>
+                    <span className={`shrink-0 ${a.price === 0 ? 'text-green-600' : 'text-slate-600'}`}>{a.price === 0 ? 'Gratuit' : `$${a.name.includes('Repas') || a.name.includes('courses') ? a.price : a.price * 2}`}</span>
                   </div>
                 ))}
               </div>
@@ -288,7 +343,7 @@ export function ConfirmeTab() {
           <div className="space-y-1">
             {fraserSimulation.costs.map((c, i) => (
               <div key={i} className="flex justify-between text-sm py-0.5 border-b border-slate-50 last:border-0">
-                <span>{c.item}</span>
+                {c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">{c.item} ↗</a> : <span>{c.item}</span>}
                 <span className="font-medium">${c.price}</span>
               </div>
             ))}
@@ -344,7 +399,7 @@ export function ConfirmeTab() {
                   <div className="bg-white border rounded-lg p-3 mb-2">
                     {opt.cost.map((c, j) => (
                       <div key={j} className="flex justify-between text-xs py-0.5">
-                        <span>{c.item}</span>
+                        {c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">{c.item} ↗</a> : <span>{c.item}</span>}
                         <span>${c.price}</span>
                       </div>
                     ))}
