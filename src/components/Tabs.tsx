@@ -41,6 +41,346 @@ function WarningTooltip({ text }: { text: string }) {
   )
 }
 
+// ==================== CONFIRMÉ ====================
+const confirmedPart1 = [
+  { day: 'J0 — 30 avr', title: 'Vol Sydney → Gold Coast', camp: '—', campPrice: 0, activities: [
+    { name: 'Vol Jetstar SYD→OOL 07h00', price: 49, status: 'confirme' as const },
+    { name: 'Pickup campervan Gold Coast Airport', price: 0, status: 'confirme' as const },
+    { name: 'Installation + courses supermarche', price: 60, status: 'estime' as const },
+  ]},
+  { day: 'J1 — 1 mai', title: 'Gold Coast / Burleigh Heads', camp: 'BIG4 Gold Coast Holiday Park', campPrice: 50, activities: [
+    { name: 'Burleigh Heads National Park (rando)', price: 0, status: 'estime' as const },
+    { name: 'Tallebudgera Creek (baignade)', price: 0, status: 'estime' as const },
+    { name: 'Byron Farmers Market (matin tot)', price: 0, status: 'estime' as const },
+    { name: 'Repas midi + soir', price: 60, status: 'estime' as const },
+  ]},
+  { day: 'J2 — 2 mai', title: 'Springbrook → Byron Bay', camp: 'Broken Head Holiday Park', campPrice: 50, activities: [
+    { name: 'Natural Bridge (Springbrook NP)', price: 0, status: 'estime' as const },
+    { name: 'Best of All Lookout', price: 0, status: 'estime' as const },
+    { name: 'Sunset a The Pass, Byron Bay', price: 0, status: 'estime' as const },
+    { name: 'Repas', price: 60, status: 'estime' as const },
+  ]},
+  { day: 'J3 — 3 mai', title: 'Byron Bay', camp: 'First Sun Holiday Park', campPrice: 60, activities: [
+    { name: 'Cape Byron Lighthouse walk (sunrise)', price: 0, status: 'estime' as const },
+    { name: 'Cours de surf 2h', price: 70, status: 'estime' as const },
+    { name: 'Kayak avec dauphins', price: 75, status: 'estime' as const },
+    { name: 'Repas', price: 60, status: 'estime' as const },
+  ]},
+  { day: 'J4 — 4 mai', title: 'Nimbin & Cascades', camp: 'First Sun Holiday Park', campPrice: 60, activities: [
+    { name: 'Nimbin village (MardiGrass weekend)', price: 0, status: 'estime' as const },
+    { name: 'Minyon Falls rando', price: 0, status: 'estime' as const },
+    { name: 'Protesters Falls', price: 0, status: 'estime' as const },
+    { name: 'Repas', price: 60, status: 'estime' as const },
+  ]},
+  { day: 'J5 — 5 mai', title: 'Crystal Castle & Plages', camp: 'Kingscliff Beach Holiday Park', campPrice: 50, activities: [
+    { name: 'Crystal Castle & Shambhala Gardens', price: 35, status: 'estime' as const },
+    { name: 'Cabarita Beach surf/detente', price: 0, status: 'estime' as const },
+    { name: 'Fingal Head Lighthouse', price: 0, status: 'estime' as const },
+    { name: 'Repas', price: 60, status: 'estime' as const },
+  ]},
+  { day: 'J6 — 6 mai', title: 'Lennox Head & Cote sud', camp: 'Lennox Head Reflections', campPrice: 50, activities: [
+    { name: 'Pat Morton Lookout', price: 0, status: 'estime' as const },
+    { name: 'Lake Ainsworth (tea-tree)', price: 0, status: 'estime' as const },
+    { name: 'Lennox Head surf', price: 0, status: 'estime' as const },
+    { name: 'Repas', price: 60, status: 'estime' as const },
+  ]},
+  { day: 'J7 — 7 mai', title: 'Retour Gold Coast → Brisbane', camp: '—', campPrice: 0, activities: [
+    { name: 'Coolangatta / Snapper Rocks (matin)', price: 0, status: 'estime' as const },
+    { name: 'Drive Gold Coast → Brisbane (1h)', price: 0, status: 'estime' as const },
+    { name: 'Brisbane : South Bank, GOMA, Eat Street', price: 30, status: 'estime' as const },
+    { name: 'Repas Brisbane', price: 70, status: 'estime' as const },
+  ]},
+]
+
+const fraserSimulation = {
+  title: 'Fraser Island (K\'gari) — Simulation tour guide',
+  duration: '3 jours / 2 nuits',
+  itinerary: [
+    { day: 'J8 — 8 mai', desc: 'Bus Brisbane → Hervey Bay (Greyhound, ~4h). Check-in hostel Hervey Bay.' },
+    { day: 'J9-10 — 9-10 mai', desc: 'Tour guide 4WD Fraser Island 2j/1n (Cool Dingo ou Dropbear). Lake McKenzie, Eli Creek, 75 Mile Beach, Maheno Shipwreck, Indian Head, Champagne Pools. Nuit en camp sur l\'ile.' },
+    { day: 'J11 — 11 mai', desc: 'Retour ferry + bus Hervey Bay → Brisbane. Recuperer le van. Drive Brisbane → Gold Coast (1h). Rendu du van.' },
+  ],
+  costs: [
+    { item: 'Bus Brisbane → Hervey Bay (aller)', price: 55 },
+    { item: 'Hostel Hervey Bay (1 nuit)', price: 45 },
+    { item: 'Tour Fraser Island 2j/1n (Cool Dingo)', price: 480 },
+    { item: 'Bus Hervey Bay → Brisbane (retour)', price: 55 },
+    { item: 'Repas J8 + J11 (hors tour)', price: 80 },
+    { item: 'Essence Brisbane → GC (rendu van)', price: 25 },
+    { item: 'Parking van Brisbane (~3 jours)', price: 45 },
+  ],
+  note: 'Le van reste gare a Brisbane (parking Wilson ou similaire ~$15/j). On fait Fraser en tour organise (4WD, camping, guide, repas inclus). Retour a Brisbane pour recuperer le van et le rendre a Gold Coast.',
+}
+
+const whitsundaysPadi = {
+  title: 'Whitsundays + PADI Open Water',
+  options: [
+    {
+      name: 'Option A : PADI integre (recommande)',
+      duration: '5 jours sur place (J12-J16)',
+      desc: 'Combiner Whitehaven Beach + PADI sur un liveaboard. Plusieurs operateurs proposent des 3-day/2-night sailing trips avec PADI Open Water inclus.',
+      itinerary: [
+        'J12 : Vol BNE→PPP, arrivee Airlie Beach, briefing PADI theorie',
+        'J13-14 : Liveaboard voilier — Whitehaven Beach + Hill Inlet + 4 plongees PADI sur le recif',
+        'J15 : Derniere plongee certification + journee libre Airlie Beach',
+        'J16 : Vol panoramique Heart Reef (optionnel) + vol PPP→SYD',
+      ],
+      cost: [
+        { item: 'Vol BNE→PPP (Jetstar)', price: 89 },
+        { item: 'Liveaboard 3j/2n + PADI Open Water (Wings Diving)', price: 850 },
+        { item: 'Hostel Airlie Beach (2 nuits : J12 + J15)', price: 130 },
+        { item: 'Vol panoramique Heart Reef (optionnel)', price: 250 },
+        { item: 'Vol PPP→SYD (Jetstar)', price: 99 },
+        { item: 'Repas (5 jours, hors liveaboard)', price: 180 },
+        { item: 'Navettes aeroport', price: 44 },
+      ],
+      extra: '+2 jours vs plan actuel (4 jours → 5 jours). Retour Sydney le 16 mai au lieu du 11.',
+    },
+    {
+      name: 'Option B : PADI separe + Whitehaven day trip',
+      duration: '5 jours sur place (J12-J16)',
+      desc: 'Faire le PADI en pool/shore dives a Airlie Beach (3 jours), puis Whitehaven en day trip separe.',
+      itinerary: [
+        'J12 : Vol BNE→PPP, arrivee Airlie Beach',
+        'J13-15 : PADI Open Water cours 3 jours (Pro Dive Whitsundays)',
+        'J15 aprem : Ocean Rafting half-day Whitehaven',
+        'J16 : Vol panoramique + vol retour PPP→SYD',
+      ],
+      cost: [
+        { item: 'Vol BNE→PPP', price: 89 },
+        { item: 'PADI Open Water 3 jours (Pro Dive)', price: 650 },
+        { item: 'Ocean Rafting half-day Whitehaven', price: 155 },
+        { item: 'Hostel Airlie Beach (4 nuits)', price: 260 },
+        { item: 'Vol panoramique (optionnel)', price: 250 },
+        { item: 'Vol PPP→SYD', price: 99 },
+        { item: 'Repas (5 jours)', price: 300 },
+        { item: 'Navettes', price: 44 },
+      ],
+      extra: '+2 jours vs plan actuel. Moins immersif mais PADI + Whitehaven garantis meme si meteo change.',
+    },
+    {
+      name: 'Option C : Sans PADI (plan actuel)',
+      duration: '4 jours (J12-J15)',
+      desc: 'Garder le plan original — snorkeling (pas de plongee) + Whitehaven + Great Barrier Reef.',
+      extra: 'Pas de jours supplementaires. Retour le 15 mai. PADI possible plus tard (Sydney, Cairns, ou a l\'etranger).',
+    },
+  ],
+  padiInfo: 'Le PADI Open Water prend 3-4 jours : theorie (en ligne avant le voyage possible), plongees confinées (piscine), 4 plongees en eau libre. Age minimum 10 ans. Pas de contre-indication medicale. Certification valable a vie, reconnue mondialement.',
+}
+
+export function ConfirmeTab() {
+  // Part 1 totals
+  const vanPrice = 1200
+  const flightPrice = 49 * 2 // 2 personnes
+  const campTotal = confirmedPart1.reduce((s, d) => s + d.campPrice, 0)
+  const actTotal = confirmedPart1.reduce((s, d) => s + d.activities.reduce((a, act) => a + act.price, 0), 0)
+  const actTotalX2 = confirmedPart1.reduce((s, d) => s + d.activities.reduce((a, act) => a + (act.name.includes('Repas') || act.name.includes('courses') ? act.price : act.price * 2), 0), 0)
+  const part1Total = vanPrice + flightPrice + campTotal + actTotalX2
+
+  // Fraser totals
+  const fraserTotal = fraserSimulation.costs.reduce((s, c) => s + c.price, 0)
+  const fraserTotalX2 = fraserSimulation.costs.reduce((s, c) => s + (c.item.includes('Parking') || c.item.includes('Essence') || c.item.includes('Repas') ? c.price : c.price * 2), 0)
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-bold">Plan confirme — Partie 1 : Byron Region</h2>
+        <p className="text-slate-500 text-sm mt-1">Vol + Van + Camps + Activites au prix moyen, pour 2 personnes.</p>
+      </div>
+
+      {/* Vol confirme */}
+      <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-green-500 text-white">CONFIRME</span>
+          <span className="font-bold">Vol aller — 30 avril 2026</span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+          <div><span className="text-slate-400">Compagnie</span><div className="font-medium">Jetstar</div></div>
+          <div><span className="text-slate-400">Trajet</span><div className="font-medium">SYD → OOL</div></div>
+          <div><span className="text-slate-400">Depart</span><div className="font-medium">07h00</div></div>
+          <div><span className="text-slate-400">Prix (x2)</span><div className="font-bold text-green-600">${flightPrice}</div></div>
+        </div>
+      </div>
+
+      {/* Van confirme */}
+      <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-green-500 text-white">CONFIRME</span>
+          <span className="font-bold">Campervan — 7 jours</span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+          <div><span className="text-slate-400">Pickup</span><div className="font-medium">Gold Coast Airport</div></div>
+          <div><span className="text-slate-400">Rendu</span><div className="font-medium">Gold Coast Airport</div></div>
+          <div><span className="text-slate-400">Duree</span><div className="font-medium">30 avr → 7 mai</div></div>
+          <div><span className="text-slate-400">Prix total</span><div className="font-bold text-green-600">${vanPrice}</div></div>
+        </div>
+      </div>
+
+      {/* Itineraire jour par jour */}
+      <div className="space-y-3">
+        <h3 className="text-lg font-bold">Itineraire jour par jour (prix moyen, x2 pers)</h3>
+        {confirmedPart1.map((day, i) => {
+          const dayActivities = day.activities.reduce((s, a) => s + (a.name.includes('Repas') || a.name.includes('courses') ? a.price : a.price * 2), 0)
+          const dayTotal = day.campPrice + dayActivities
+          return (
+            <div key={i} className="border rounded-xl p-4 bg-white">
+              <div className="flex items-center justify-between mb-2">
+                <div>
+                  <span className="text-xs font-bold px-2 py-1 rounded bg-sky-500 text-white mr-2">{day.day.split(' — ')[0]}</span>
+                  <span className="font-bold">{day.title}</span>
+                </div>
+                <span className="font-bold text-sky-600">${dayTotal}</span>
+              </div>
+              {day.camp !== '—' && (
+                <div className="text-sm text-slate-500 mb-2">Nuit : {day.camp} — <span className="font-medium text-slate-700">${day.campPrice}/nuit</span></div>
+              )}
+              <div className="space-y-1">
+                {day.activities.map((a, j) => (
+                  <div key={j} className="flex items-center justify-between text-sm py-0.5">
+                    <div className="flex items-center gap-2">
+                      {a.status === 'confirme' ? (
+                        <span className="w-2 h-2 rounded-full bg-green-500" />
+                      ) : (
+                        <span className="w-2 h-2 rounded-full bg-amber-400" />
+                      )}
+                      <span>{a.name}</span>
+                    </div>
+                    <span className={a.price === 0 ? 'text-green-600' : 'text-slate-600'}>{a.price === 0 ? 'Gratuit' : `$${a.name.includes('Repas') || a.name.includes('courses') ? a.price : a.price * 2}`}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Total Part 1 */}
+      <div className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white rounded-xl p-6">
+        <h3 className="font-bold text-lg mb-4">Total Partie 1 — Byron Region (2 personnes)</h3>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+          <div className="text-center"><div className="opacity-75">Vol</div><div className="text-xl font-bold">${flightPrice}</div></div>
+          <div className="text-center"><div className="opacity-75">Van 7j</div><div className="text-xl font-bold">${vanPrice}</div></div>
+          <div className="text-center"><div className="opacity-75">Camps ({confirmedPart1.filter(d => d.campPrice > 0).length} nuits)</div><div className="text-xl font-bold">${campTotal}</div></div>
+          <div className="text-center"><div className="opacity-75">Activites + repas</div><div className="text-xl font-bold">${actTotalX2}</div></div>
+          <div className="text-center border-l border-white/30"><div className="opacity-75">TOTAL</div><div className="text-2xl font-bold">${part1Total}</div><div className="text-xs opacity-75">${Math.round(part1Total / 2)}/pers</div></div>
+        </div>
+      </div>
+
+      {/* ==================== FRASER ISLAND ==================== */}
+      <div className="border-t-2 border-amber-300 pt-6">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-amber-500 text-white">SIMULATION</span>
+          <h2 className="text-2xl font-bold">{fraserSimulation.title}</h2>
+        </div>
+        <p className="text-slate-500 text-sm mb-4">{fraserSimulation.duration} — Tour guide 4WD, pas d'avion. Van gare a Brisbane pendant Fraser.</p>
+
+        <div className="space-y-2 mb-4">
+          {fraserSimulation.itinerary.map((step, i) => (
+            <div key={i} className="border rounded-lg p-3 bg-amber-50/50">
+              <span className="text-xs font-bold text-amber-700">{step.day}</span>
+              <p className="text-sm mt-0.5">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-white border rounded-xl p-4 mb-4">
+          <h4 className="font-bold text-sm mb-2">Couts estimes (par personne sauf mention)</h4>
+          <div className="space-y-1">
+            {fraserSimulation.costs.map((c, i) => (
+              <div key={i} className="flex justify-between text-sm py-0.5 border-b border-slate-50 last:border-0">
+                <span>{c.item}</span>
+                <span className="font-medium">${c.price}</span>
+              </div>
+            ))}
+            <div className="flex justify-between text-sm font-bold pt-2 border-t">
+              <span>Total par personne</span>
+              <span className="text-amber-600">${fraserTotal}</span>
+            </div>
+            <div className="flex justify-between text-sm font-bold">
+              <span>Total 2 personnes</span>
+              <span className="text-amber-600">${fraserTotalX2}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+          <p><strong>Logistique :</strong> {fraserSimulation.note}</p>
+          <p className="mt-2"><strong>Impact calendrier :</strong> +4 jours (J8-J11). Le vol vers les Whitsundays passe au J12 au lieu du J8.</p>
+        </div>
+      </div>
+
+      {/* ==================== WHITSUNDAYS + PADI ==================== */}
+      <div className="border-t-2 border-purple-300 pt-6">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-purple-500 text-white">RECOS</span>
+          <h2 className="text-2xl font-bold">{whitsundaysPadi.title}</h2>
+        </div>
+        <p className="text-slate-500 text-sm mb-4">{whitsundaysPadi.padiInfo}</p>
+
+        <div className="space-y-4">
+          {whitsundaysPadi.options.map((opt, i) => {
+            const optTotal = opt.cost?.reduce((s, c) => s + c.price, 0) || 0
+            const optTotalX2 = opt.cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0) || 0
+            return (
+              <div key={i} className={`border rounded-xl p-4 ${i === 0 ? 'border-purple-300 bg-purple-50/30' : 'bg-white'}`}>
+                <div className="flex items-center gap-2 mb-1">
+                  {i === 0 && <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">Recommande</span>}
+                  <h4 className="font-bold">{opt.name}</h4>
+                </div>
+                <p className="text-sm text-slate-500 mb-2">{opt.duration} — {opt.desc}</p>
+
+                {opt.itinerary && (
+                  <div className="space-y-1 mb-3">
+                    {opt.itinerary.map((step, j) => (
+                      <div key={j} className="text-sm flex items-start gap-2">
+                        <span className="text-purple-400 mt-0.5">›</span>
+                        <span>{step}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {opt.cost && (
+                  <div className="bg-white border rounded-lg p-3 mb-2">
+                    {opt.cost.map((c, j) => (
+                      <div key={j} className="flex justify-between text-xs py-0.5">
+                        <span>{c.item}</span>
+                        <span>${c.price}</span>
+                      </div>
+                    ))}
+                    <div className="flex justify-between text-sm font-bold pt-2 mt-1 border-t">
+                      <span>Total 2 pers</span>
+                      <span className="text-purple-600">~${optTotalX2}</span>
+                    </div>
+                  </div>
+                )}
+
+                <p className="text-xs text-slate-500 italic">{opt.extra}</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* ==================== GRAND TOTAL ==================== */}
+      <div className="bg-gradient-to-r from-slate-800 to-slate-700 text-white rounded-xl p-6">
+        <h3 className="font-bold text-lg mb-4">Estimation grand total (2 personnes)</h3>
+        <div className="space-y-2 text-sm">
+          <div className="flex justify-between"><span className="opacity-75">Partie 1 — Byron Region (J0-J7)</span><span className="font-bold">${part1Total}</span></div>
+          <div className="flex justify-between"><span className="opacity-75">Fraser Island (J8-J11)</span><span className="font-bold">${fraserTotalX2}</span></div>
+          <div className="flex justify-between"><span className="opacity-75">Whitsundays + PADI Option A (J12-J16)</span><span className="font-bold">~${whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0)}</span></div>
+          <div className="flex justify-between pt-2 mt-2 border-t border-white/20 text-lg">
+            <span className="font-bold">TOTAL ESTIME</span>
+            <span className="font-bold">${part1Total + fraserTotalX2 + (whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0) || 0)}</span>
+          </div>
+          <div className="text-right text-xs opacity-60">${Math.round((part1Total + fraserTotalX2 + (whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0) || 0)) / 2)} par personne</div>
+        </div>
+        <p className="text-xs opacity-50 mt-4">Voyage total : 17 jours (30 avril → 16 mai). Prix indicatifs, activites au tarif moyen.</p>
+      </div>
+    </div>
+  )
+}
+
 // ==================== ITINÉRAIRE ====================
 export function ItineraireTab() {
   const [openDay, setOpenDay] = useState<number | null>(null)

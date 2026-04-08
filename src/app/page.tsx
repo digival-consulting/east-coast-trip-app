@@ -1,8 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { ItineraireTab, VillesTab, BudgetTab, VolsTab, VehiculesTab, EvenementsTab, CarteTab, ResumeTab, PackingTab, MeteoTab } from '@/components/Tabs'
+import { ConfirmeTab, ItineraireTab, VillesTab, BudgetTab, VolsTab, VehiculesTab, EvenementsTab, CarteTab, ResumeTab, PackingTab, MeteoTab } from '@/components/Tabs'
 
 const tabs = [
+  { id: 'confirme', label: 'Confirme', icon: '✅' },
   { id: 'itineraire', label: 'Itineraire', icon: '🗺' },
   { id: 'villes', label: 'Villes', icon: '🏖' },
   { id: 'budget', label: 'Budget', icon: '💰' },
@@ -31,7 +32,7 @@ function useCountdown() {
 }
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('itineraire')
+  const [activeTab, setActiveTab] = useState('confirme')
   const countdown = useCountdown()
 
   return (
@@ -79,6 +80,7 @@ export default function Home() {
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-6">
+        {activeTab === 'confirme' && <ConfirmeTab />}
         {activeTab === 'itineraire' && <ItineraireTab />}
         {activeTab === 'villes' && <VillesTab />}
         {activeTab === 'budget' && <BudgetTab />}
