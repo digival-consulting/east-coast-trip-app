@@ -95,7 +95,7 @@ export interface POI {
 export const cities: City[] = [
   {
     id: 'gold-coast', name: 'Gold Coast / Burleigh Heads', region: 'byron',
-    image: '/images/burleigh-heads.png',
+    image: '/trip-east-coast/images/burleigh-heads.png',
     description: 'Point de départ du road trip. Surf, cafés branchés et parcs nationaux.',
     lat: -28.0836, lng: 153.4311,
     activities: [
@@ -108,7 +108,7 @@ export const cities: City[] = [
   },
   {
     id: 'springbrook', name: 'Springbrook / Hinterland', region: 'byron',
-    image: '/images/springbrook.png',
+    image: '/trip-east-coast/images/springbrook.png',
     description: 'Forêt tropicale classée UNESCO, cascades et vers luisants.',
     lat: -28.2340, lng: 153.2700,
     activities: [
@@ -119,7 +119,7 @@ export const cities: City[] = [
   },
   {
     id: 'byron-bay', name: 'Byron Bay', region: 'byron',
-    image: '/images/byron-bay.png',
+    image: '/trip-east-coast/images/byron-bay.png',
     description: 'Icône de la côte est. Surf, phare, dauphins et marchés.',
     lat: -28.6437, lng: 153.6120,
     activities: [
@@ -134,7 +134,7 @@ export const cities: City[] = [
   },
   {
     id: 'nimbin', name: 'Nimbin & Hinterland', region: 'byron',
-    image: '/images/nimbin.png',
+    image: '/trip-east-coast/images/nimbin.png',
     description: 'Village hippie légendaire. Street art, cascades et forêt tropicale.',
     lat: -28.5960, lng: 153.2230,
     activities: [
@@ -147,7 +147,7 @@ export const cities: City[] = [
   },
   {
     id: 'crystal-castle', name: 'Crystal Castle / Mullumbimby', region: 'byron',
-    image: '/images/crystal-castle.png',
+    image: '/trip-east-coast/images/crystal-castle.png',
     description: 'Jardins zen avec cristaux géants et vue sur l\'hinterland.',
     lat: -28.5500, lng: 153.4800,
     activities: [
@@ -157,7 +157,7 @@ export const cities: City[] = [
   },
   {
     id: 'cabarita', name: 'Cabarita Beach / Kingscliff', region: 'byron',
-    image: '/images/cabarita-beach.png',
+    image: '/trip-east-coast/images/cabarita-beach.png',
     description: 'Plages secrètes et villages côtiers authentiques.',
     lat: -28.3340, lng: 153.5700,
     activities: [
@@ -169,7 +169,7 @@ export const cities: City[] = [
   },
   {
     id: 'lennox', name: 'Lennox Head / Ballina', region: 'byron',
-    image: '/images/lennox-head.png',
+    image: '/trip-east-coast/images/lennox-head.png',
     description: 'Le secret le mieux gardé de la côte. Surf, lac et lookouts.',
     lat: -28.7990, lng: 153.5900,
     activities: [
@@ -181,7 +181,7 @@ export const cities: City[] = [
   },
   {
     id: 'airlie', name: 'Airlie Beach', region: 'whitsundays',
-    image: '/images/airlie-beach.png',
+    image: '/trip-east-coast/images/airlie-beach.png',
     description: 'Porte d\'entrée des Whitsundays. Lagoon tropicale et vie nocturne.',
     lat: -20.2690, lng: 148.7180,
     activities: [
@@ -193,7 +193,7 @@ export const cities: City[] = [
   },
   {
     id: 'whitsundays', name: 'Whitsunday Islands', region: 'whitsundays',
-    image: '/images/whitehaven-aerial.png',
+    image: '/trip-east-coast/images/whitehaven-aerial.png',
     description: 'Whitehaven Beach, Hill Inlet et 74 îles paradisiaques.',
     lat: -20.1500, lng: 148.9500,
     activities: [
@@ -204,7 +204,7 @@ export const cities: City[] = [
   },
   {
     id: 'gbr', name: 'Grande Barrière de Corail', region: 'whitsundays',
-    image: '/images/great-barrier-reef.png',
+    image: '/trip-east-coast/images/great-barrier-reef.png',
     description: 'Le plus grand récif corallien du monde. Snorkeling, plongée et vols panoramiques.',
     lat: -19.7260, lng: 149.1780,
     activities: [
@@ -222,39 +222,39 @@ export const itinerary: Day[] = [
     highlights: [
       { time: '7h00-9h30', name: 'Vol aller Sydney → Gold Coast', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: 'https://www.jetstar.com' },
       { time: '10h30-11h30', name: 'Récupération du campervan', image: 'https://storage.googleapis.com/jucy-chilwa-prod-57ad03.appspot.com/Image/623cbb93_59fe_4073_9b15_dc3d44ab4438_ca591bd595/623cbb93_59fe_4073_9b15_dc3d44ab4438_ca591bd595.jpg', url: 'https://www.jucy.com.au' },
-      { time: '12h00-13h30', name: 'Burleigh Heads National Park', image: '/images/burleigh-heads.png', url: 'https://parks.des.qld.gov.au/parks/burleigh-head' },
+      { time: '12h00-13h30', name: 'Burleigh Heads National Park', image: '/trip-east-coast/images/burleigh-heads.png', url: 'https://parks.des.qld.gov.au/parks/burleigh-head' },
       { time: '14h00-15h30', name: 'Tallebudgera Creek — baignade', image: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Tallebudgera_Creek_and_mouth_with_Burleigh_headland_on_the_left.jpg', url: 'https://www.goldcoast.com.au/things-to-do/tallebudgera-creek' },
     ], overnight: 'BIG4 Gold Coast Holiday Park', overnightUrl: 'https://www.big4.com.au/caravan-parks/qld/gold-coast/gold-coast-holiday-park', driveKm: 0 },
   { day: 2, date: '2 mai', title: 'Hinterland → Byron Bay', cityId: 'springbrook', caption: 'Natural Bridge : la grotte aux vers luisants de Springbrook National Park',
     highlights: [
-      { time: '8h00-10h00', name: 'Natural Bridge (Springbrook)', image: '/images/springbrook.png', url: 'https://parks.des.qld.gov.au/parks/springbrook' },
+      { time: '8h00-10h00', name: 'Natural Bridge (Springbrook)', image: '/trip-east-coast/images/springbrook.png', url: 'https://parks.des.qld.gov.au/parks/springbrook' },
       { time: '10h30-11h30', name: 'Best of All Lookout', image: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Best_Of_All_Lookout_Springbrook_National_Park.JPG', url: 'https://parks.des.qld.gov.au/parks/springbrook' },
       { time: '12h00-14h00', name: 'Route vers Byron Bay (1h30)', image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gold_Coast_Highway_over_Tallebudgera_Creek.JPG', url: '' },
       { time: '16h00-18h00', name: 'Sunset à The Pass, Byron Bay', image: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Byron_Bay_Main_Beach_Sunset.jpg', url: 'https://www.visitbyronbay.com' },
     ], overnight: 'Broken Head Holiday Park', overnightUrl: 'https://www.brokenheadholidaypark.com.au', driveKm: 130 },
   { day: 3, date: '3 mai', title: 'Byron Bay', cityId: 'byron-bay', caption: 'Le phare de Cape Byron au lever du soleil — point le plus à l\'est de l\'Australie',
     highlights: [
-      { time: '6h30-8h00', name: 'Cape Byron Lighthouse walk', image: '/images/byron-bay.png', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/cape-byron-walking-track' },
+      { time: '6h30-8h00', name: 'Cape Byron Lighthouse walk', image: '/trip-east-coast/images/byron-bay.png', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/cape-byron-walking-track' },
       { time: '9h00-11h00', name: 'Cours de surf 2h', image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Clarkes_Beach.jpg', url: 'https://mojosurf.com/byron-bay' },
       { time: '14h00-16h30', name: 'Kayak avec dauphins', image: 'https://wildbyron.com.au/wp-content/uploads/2022/02/whale-watching-close-photo.jpg', url: 'https://www.capebayronkayaks.com' },
       { time: '17h00-18h30', name: 'Coucher de soleil Main Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Byron_Bay_Main_Beach_Sunset.jpg', url: '' },
     ], overnight: 'First Sun Holiday Park Byron Bay', overnightUrl: 'https://www.firstsunholidaypark.com.au', driveKm: 15 },
   { day: 4, date: '4 mai', title: 'Nimbin & Cascades', cityId: 'nimbin', caption: 'Nimbin : murales psychédéliques et ambiance hippie sur la rue principale',
     highlights: [
-      { time: '8h30-10h30', name: 'Route vers Nimbin + visite village', image: '/images/nimbin.png', url: 'https://www.visitnimbin.com.au' },
+      { time: '8h30-10h30', name: 'Route vers Nimbin + visite village', image: '/trip-east-coast/images/nimbin.png', url: 'https://www.visitnimbin.com.au' },
       { time: '11h00-12h30', name: 'Minyon Falls — randonnée', image: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Minyon_Falls.jpg', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/lookouts/minyon-falls-lookout' },
       { time: '13h00-14h00', name: 'Protesters Falls', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a1/Protestors_Falls_-_panoramio.jpg', url: 'https://www.nationalparks.nsw.gov.au/things-to-do/walking-tracks/protesters-falls-walk' },
       { time: '15h00-16h00', name: 'Bangalow — café et village', image: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Byron_Street%2C_Bangalow_NSW_2014.jpg', url: 'https://www.bangalowmarket.com.au' },
     ], overnight: 'First Sun Holiday Park Byron Bay', overnightUrl: 'https://www.firstsunholidaypark.com.au', driveKm: 140 },
   { day: 5, date: '5 mai', title: 'Crystal Castle & Plages', cityId: 'crystal-castle', caption: 'Les cristaux d\'améthyste géants du Crystal Castle dans les jardins tropicaux',
     highlights: [
-      { time: '9h00-12h00', name: 'Crystal Castle & Shambhala Gardens', image: '/images/crystal-castle.png', url: 'https://crystalcastle.com.au' },
-      { time: '13h00-15h00', name: 'Cabarita Beach — surf et détente', image: '/images/cabarita-beach.png', url: '' },
+      { time: '9h00-12h00', name: 'Crystal Castle & Shambhala Gardens', image: '/trip-east-coast/images/crystal-castle.png', url: 'https://crystalcastle.com.au' },
+      { time: '13h00-15h00', name: 'Cabarita Beach — surf et détente', image: '/trip-east-coast/images/cabarita-beach.png', url: '' },
       { time: '16h00-17h30', name: 'Fingal Head Lighthouse — colonnes de basalte', image: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Basalt_columns%2C_Fingal_Head%2C_New_South_Wales.jpg', url: '' },
     ], overnight: 'Kingscliff Beach Holiday Park', overnightUrl: 'https://www.kingscliffbeachholidaypark.com.au', driveKm: 90 },
   { day: 6, date: '6 mai', title: 'Lennox Head & Côte sud', cityId: 'lennox', caption: 'Vue spectaculaire depuis Pat Morton Lookout sur Seven Mile Beach',
     highlights: [
-      { time: '8h30-9h30', name: 'Pat Morton Lookout', image: '/images/lennox-head.png', url: '' },
+      { time: '8h30-9h30', name: 'Pat Morton Lookout', image: '/trip-east-coast/images/lennox-head.png', url: '' },
       { time: '10h00-12h00', name: 'Lake Ainsworth — baignade tea-tree', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Lake_Ainsworth_-_panoramio.jpg', url: '' },
       { time: '13h00-15h00', name: 'Lennox Head surf', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Snapper_Rocks%2C_Coolangatta%2C_Australia_%28Unsplash%29.jpg', url: '' },
       { time: '15h30-17h00', name: 'Seven Mile Beach — promenade', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/2020-12-20_Cabarita_Beach.jpg', url: '' },
@@ -269,20 +269,20 @@ export const itinerary: Day[] = [
     highlights: [
       { time: '8h00-9h30', name: 'Vol Gold Coast → Proserpine', image: 'https://upload.wikimedia.org/wikipedia/commons/4/49/Exterior_of_Gold_Coast_Airport%2C_2022.jpg', url: 'https://www.jetstar.com' },
       { time: '10h00-11h00', name: 'Shuttle aéroport → Airlie Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.whitsundaytransit.com.au' },
-      { time: '12h00-14h00', name: 'Airlie Beach Lagoon', image: '/images/airlie-beach.png', url: 'https://www.airliebeach.com/things-to-do/airlie-beach-lagoon' },
+      { time: '12h00-14h00', name: 'Airlie Beach Lagoon', image: '/trip-east-coast/images/airlie-beach.png', url: 'https://www.airliebeach.com/things-to-do/airlie-beach-lagoon' },
       { time: '18h00-20h00', name: 'Dîner en ville', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: '' },
     ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
   { day: 9, date: '9 mai', title: 'Whitehaven Beach', cityId: 'whitsundays', caption: 'Vue aérienne de Hill Inlet — le sable blanc et l\'eau turquoise des Whitsundays',
     highlights: [
-      { time: '7h30-17h00', name: 'Ocean Rafting full day — Hill Inlet + Whitehaven + snorkel', image: '/images/whitehaven-aerial.png', url: 'https://www.oceanrafting.com.au' },
+      { time: '7h30-17h00', name: 'Ocean Rafting full day — Hill Inlet + Whitehaven + snorkel', image: '/trip-east-coast/images/whitehaven-aerial.png', url: 'https://www.oceanrafting.com.au' },
     ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
   { day: 10, date: '10 mai', title: 'Grande Barrière de Corail', cityId: 'gbr', caption: 'Snorkeling sur la Grande Barrière : coraux, tortues et poissons tropicaux',
     highlights: [
-      { time: '7h00-17h00', name: 'Red Cat Adventures — journée récif extérieur', image: '/images/great-barrier-reef.png', url: 'https://redcatadventures.com.au' },
+      { time: '7h00-17h00', name: 'Red Cat Adventures — journée récif extérieur', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://redcatadventures.com.au' },
     ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
   { day: 11, date: '11 mai', title: 'Vol panoramique & Retour', cityId: 'gbr', caption: 'Heart Reef vu du ciel — le récif en forme de coeur iconique',
     highlights: [
-      { time: '8h00-9h00', name: 'Vol panoramique Heart Reef', image: '/images/helicopter-whitsundays.png', url: 'https://www.gslaviation.com.au' },
+      { time: '8h00-9h00', name: 'Vol panoramique Heart Reef', image: '/trip-east-coast/images/helicopter-whitsundays.png', url: 'https://www.gslaviation.com.au' },
       { time: '10h00-11h00', name: 'Shuttle → aéroport Proserpine', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.whitsundaytransit.com.au' },
       { time: '12h00-15h00', name: 'Vol retour Proserpine → Sydney', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: 'https://www.jetstar.com' },
     ], overnight: '—', overnightUrl: '', driveKm: 0 },

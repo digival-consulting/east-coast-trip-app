@@ -543,6 +543,120 @@ export function CarteTab() {
   )
 }
 
+// ==================== METEO ====================
+const weatherData = [
+  { city: 'Gold Coast', temp: '20-25', water: '23', rain: '80mm (5j)', uv: 'Modéré', note: 'Doux et ensoleillé, parfait pour la plage' },
+  { city: 'Byron Bay', temp: '18-24', water: '22', rain: '100mm (7j)', uv: 'Modéré', note: 'Légèrement plus frais, brises côtières' },
+  { city: 'Springbrook', temp: '14-20', water: '—', rain: '120mm (8j)', uv: 'Faible', note: 'Altitude 900m, brouillard matinal fréquent' },
+  { city: 'Nimbin', temp: '15-23', water: '—', rain: '90mm (6j)', uv: 'Modéré', note: 'Hinterland, nuits fraîches' },
+  { city: 'Lennox Head', temp: '17-23', water: '22', rain: '100mm (7j)', uv: 'Modéré', note: 'Comme Byron, vents de sud possibles' },
+  { city: 'Airlie Beach', temp: '22-27', water: '25', rain: '50mm (3j)', uv: 'Élevé', note: 'Tropical, saison sèche commence — idéal' },
+  { city: 'Whitsundays', temp: '23-28', water: '25', rain: '40mm (3j)', uv: 'Élevé', note: 'Conditions parfaites pour snorkeling, visibilité 15-20m' },
+]
+
+export function MeteoTab() {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">Meteo — Mai 2026</h2>
+      <p className="text-slate-500 text-sm">Moyennes saisonnieres pour chaque etape du voyage. Mai = debut de l'automne en Australie, mais climat subtropical sur la cote est.</p>
+
+      <div className="grid gap-3">
+        {weatherData.map((w, i) => (
+          <div key={i} className="border rounded-xl p-4 bg-white">
+            <div className="flex flex-col md:flex-row md:items-center gap-3">
+              <div className="flex-1">
+                <h3 className="font-bold text-lg">{w.city}</h3>
+                <p className="text-xs text-slate-400 mt-0.5">{w.note}</p>
+              </div>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <div className="text-center"><div className="text-xs text-slate-400">Air</div><div className="font-bold text-orange-500">{w.temp}°C</div></div>
+                <div className="text-center"><div className="text-xs text-slate-400">Eau</div><div className="font-bold text-sky-500">{w.water}{w.water !== '—' ? '°C' : ''}</div></div>
+                <div className="text-center"><div className="text-xs text-slate-400">Pluie</div><div className="font-bold text-blue-500">{w.rain}</div></div>
+                <div className="text-center"><div className="text-xs text-slate-400">UV</div><div className="font-bold text-amber-500">{w.uv}</div></div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800 space-y-1">
+        <p><strong>A emporter :</strong> Veste legere pour les soirees (14-18°C a Byron/Springbrook), mais shorts et t-shirt suffisent en journee.</p>
+        <p><strong>Meduses :</strong> Saison terminee fin avril aux Whitsundays, mais combinaisons stinger fournies sur les tours.</p>
+        <p><strong>Coucher de soleil :</strong> ~17h15 debut mai (jours courts, prevoir les activites en consequence).</p>
+      </div>
+    </div>
+  )
+}
+
+// ==================== PACKING / VALISE ====================
+const packingCategories = [
+  { name: 'Papiers & tech', items: ['Passeport + visa eTA', 'Permis de conduire international', 'Copies passeport (email + cloud)', 'Telephone + chargeur', 'Batterie externe 20000mAh', 'Adaptateur prise AU (type I)', 'GoPro + cartes SD + perche', 'Ecouteurs'] },
+  { name: 'Vetements', items: ['T-shirts x5', 'Short x3', 'Pantalon leger x1', 'Veste coupe-vent legere', 'Pull polaire leger (soirees)', 'Maillot de bain x2', 'Sous-vetements x7', 'Chaussettes x5'] },
+  { name: 'Chaussures', items: ['Tongs / sandales', 'Baskets rando legeres', 'Chaussures aquatiques (recif)'] },
+  { name: 'Plage & eau', items: ['Serviette microfibre x2', 'Creme solaire SPF50+', 'Apres-soleil / aloe vera', 'Chapeau / casquette', 'Lunettes de soleil polarisees', 'Sac etanche (telephone)', 'Combinaison neoprene courte (optionnel)'] },
+  { name: 'Sante & hygiene', items: ['Trousse de toilette', 'Medicaments de base (doliprane, imodium)', 'Anti-moustiques tropical', 'Pansements / desinfectant', 'Creme anti-irritations'] },
+  { name: 'Camping van', items: ['Sac de couchage leger', 'Oreiller compressible', 'Lampe frontale', 'Couteau suisse', 'Sacs poubelle', 'Lingettes nettoyantes', 'App WikiCamps Australia ($8)'] },
+]
+
+export function PackingTab() {
+  const [checked, setChecked] = useState<Record<string, boolean>>(() => {
+    if (typeof window === 'undefined') return {}
+    try { return JSON.parse(localStorage.getItem('packing-checked') || '{}') } catch { return {} }
+  })
+
+  const toggle = (item: string) => {
+    setChecked(prev => {
+      const next = { ...prev, [item]: !prev[item] }
+      localStorage.setItem('packing-checked', JSON.stringify(next))
+      return next
+    })
+  }
+
+  const totalItems = packingCategories.reduce((sum, c) => sum + c.items.length, 0)
+  const checkedCount = Object.values(checked).filter(Boolean).length
+  const pct = Math.round((checkedCount / totalItems) * 100)
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <h2 className="text-2xl font-bold">Checklist valise</h2>
+        <span className="text-sm text-slate-500">{checkedCount}/{totalItems} — {pct}%</span>
+      </div>
+
+      {/* Barre de progression */}
+      <div className="w-full bg-slate-100 rounded-full h-3">
+        <div className="h-3 rounded-full bg-gradient-to-r from-sky-500 to-green-500 transition-all" style={{ width: `${pct}%` }} />
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4">
+        {packingCategories.map((cat, i) => {
+          const catChecked = cat.items.filter(item => checked[item]).length
+          return (
+            <div key={i} className="border rounded-xl p-4 bg-white">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-bold text-sm">{cat.name}</h3>
+                <span className="text-xs text-slate-400">{catChecked}/{cat.items.length}</span>
+              </div>
+              <div className="space-y-1">
+                {cat.items.map((item, j) => (
+                  <label key={j} className="flex items-center gap-2 py-1 text-sm cursor-pointer hover:bg-slate-50 rounded px-1">
+                    <input type="checkbox" checked={!!checked[item]} onChange={() => toggle(item)} className="accent-sky-500" />
+                    <span className={checked[item] ? 'line-through text-slate-400' : ''}>{item}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      <button onClick={() => { setChecked({}); localStorage.removeItem('packing-checked') }} className="text-xs text-red-400 hover:text-red-600">
+        Tout decocher
+      </button>
+    </div>
+  )
+}
+
 // ==================== RÉSUMÉ ====================
 export function ResumeTab() {
   const highlights = [

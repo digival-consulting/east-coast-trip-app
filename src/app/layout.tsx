@@ -3,7 +3,9 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'East Coast Australia — Mai 2026 | Valentin & Nicolas',
-  description: 'Road trip interactif de 14 jours sur la cote est australienne',
+  description: 'Road trip interactif de 11 jours sur la cote est australienne',
+  robots: { index: false, follow: false },
+  icons: { icon: '/trip-east-coast/favicon.svg' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

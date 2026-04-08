@@ -1,6 +1,6 @@
 'use client'
-import { useState } from 'react'
-import { ItineraireTab, VillesTab, BudgetTab, VolsTab, VehiculesTab, EvenementsTab, CarteTab, ResumeTab } from '@/components/Tabs'
+import { useState, useEffect } from 'react'
+import { ItineraireTab, VillesTab, BudgetTab, VolsTab, VehiculesTab, EvenementsTab, CarteTab, ResumeTab, PackingTab, MeteoTab } from '@/components/Tabs'
 
 const tabs = [
   { id: 'itineraire', label: 'Itineraire', icon: '🗺' },
@@ -10,21 +10,48 @@ const tabs = [
   { id: 'vehicules', label: 'Vehicules', icon: '🚐' },
   { id: 'evenements', label: 'Events', icon: '📅' },
   { id: 'carte', label: 'Carte', icon: '📍' },
+  { id: 'meteo', label: 'Meteo', icon: '🌤' },
+  { id: 'packing', label: 'Valise', icon: '🎒' },
   { id: 'resume', label: 'Resume', icon: '📋' },
 ]
 
+const DEPARTURE = new Date('2026-05-01T07:00:00+10:00')
+
+function useCountdown() {
+  const [now, setNow] = useState(() => new Date())
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 60_000)
+    return () => clearInterval(id)
+  }, [])
+  const diff = DEPARTURE.getTime() - now.getTime()
+  if (diff <= 0) return null
+  const days = Math.floor(diff / 86_400_000)
+  const hours = Math.floor((diff % 86_400_000) / 3_600_000)
+  return { days, hours }
+}
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState('itineraire')
+  const countdown = useCountdown()
 
   return (
     <div className="min-h-screen">
       {/* Hero */}
       <div className="relative h-64 md:h-80 overflow-hidden">
-        <img src="/images/hero-banner.png" alt="East Coast Australia" className="w-full h-full object-cover" />
+        <img src="/trip-east-coast/images/hero-banner.png" alt="East Coast Australia" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30 flex flex-col items-center justify-center text-white text-center px-4">
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight">East Coast Australia</h1>
           <p className="text-lg md:text-xl mt-2 opacity-90">Mai 2026</p>
           <p className="text-sm md:text-base mt-1 opacity-75">Valentin & Nicolas — 11 jours de Byron Bay aux Whitsundays</p>
+          {countdown && (
+            <div className="mt-4 flex items-center gap-3 bg-white/15 backdrop-blur-sm rounded-full px-5 py-2">
+              <span className="text-2xl md:text-3xl font-bold">{countdown.days}</span>
+              <span className="text-sm opacity-80">jours</span>
+              <span className="text-2xl md:text-3xl font-bold">{countdown.hours}</span>
+              <span className="text-sm opacity-80">heures</span>
+              <span className="text-xs opacity-60 ml-2">avant le depart</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -59,6 +86,8 @@ export default function Home() {
         {activeTab === 'vehicules' && <VehiculesTab />}
         {activeTab === 'evenements' && <EvenementsTab />}
         {activeTab === 'carte' && <CarteTab />}
+        {activeTab === 'meteo' && <MeteoTab />}
+        {activeTab === 'packing' && <PackingTab />}
         {activeTab === 'resume' && <ResumeTab />}
       </div>
     </div>
