@@ -1200,11 +1200,11 @@ export function ResumeTab() {
       <h2 className="text-2xl font-bold">Résumé du voyage</h2>
 
       <div className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white rounded-xl p-6">
-        <div className="grid grid-cols-4 gap-4 text-center">
-          <div><div className="text-3xl font-bold">11</div><div className="text-sm opacity-75">jours</div></div>
-          <div><div className="text-3xl font-bold">10</div><div className="text-sm opacity-75">villes</div></div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div><div className="text-3xl font-bold">{itinerary.length}</div><div className="text-sm opacity-75">jours</div></div>
+          <div><div className="text-3xl font-bold">{cities.length}</div><div className="text-sm opacity-75">villes</div></div>
           <div><div className="text-3xl font-bold">3</div><div className="text-sm opacity-75">vols</div></div>
-          <div><div className="text-3xl font-bold">~565</div><div className="text-sm opacity-75">km en van</div></div>
+          <div><div className="text-3xl font-bold">~{itinerary.reduce((s, d) => s + d.driveKm, 0)}</div><div className="text-sm opacity-75">km en van</div></div>
         </div>
       </div>
 
