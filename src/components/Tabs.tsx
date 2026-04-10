@@ -532,8 +532,8 @@ export function VillesTab() {
               <h3 className="font-bold">{city.name}</h3>
               <p className="text-sm text-slate-500 truncate">{city.description}</p>
             </div>
-            <span className={`text-xs px-2 py-0.5 rounded-full font-medium shrink-0 ${city.region === 'whitsundays' ? 'bg-orange-100 text-orange-700' : 'bg-sky-100 text-sky-700'}`}>
-              {city.region === 'whitsundays' ? 'Whitsundays' : 'Byron Region'}
+            <span className={`text-xs px-2 py-0.5 rounded-full font-medium shrink-0 ${city.region === 'whitsundays' ? 'bg-orange-100 text-orange-700' : city.region === 'brisbane' ? 'bg-emerald-100 text-emerald-700' : 'bg-sky-100 text-sky-700'}`}>
+              {city.region === 'whitsundays' ? 'Whitsundays' : city.region === 'brisbane' ? 'Brisbane / Fraser' : 'Byron Region'}
             </span>
             <svg className={`w-5 h-5 text-slate-400 transition-transform shrink-0 ${open === city.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </button>
@@ -705,7 +705,7 @@ export function BudgetTab() {
 // ==================== VOLS ====================
 export function VolsTab() {
   const segments = ['syd-gc', 'gc-ppp', 'ppp-syd'] as const
-  const segmentLabels: Record<string, string> = { 'syd-gc': 'Sydney → Gold Coast (1 mai)', 'gc-ppp': 'Gold Coast → Proserpine (8 mai)', 'ppp-syd': 'Proserpine → Sydney (11 mai)' }
+  const segmentLabels: Record<string, string> = { 'syd-gc': 'Sydney → Gold Coast (30 avr)', 'gc-ppp': 'Brisbane → Proserpine (11 mai)', 'ppp-syd': 'Proserpine → Sydney (16 mai)' }
   const [segment, setSegment] = useState<string>('syd-gc')
   const [selectedDate, setSelectedDate] = useState<string>('all')
   const [sortBy, setSortBy] = useState<'price' | 'time' | 'airline'>('time')
