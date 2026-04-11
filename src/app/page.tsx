@@ -17,7 +17,7 @@ const tabs = [
   { id: 'resume', label: 'Resume', icon: '📋' },
 ]
 
-const DEPARTURE = new Date('2026-05-01T07:00:00+10:00')
+const DEPARTURE = new Date('2026-04-30T07:00:00+10:00')
 
 function useCountdown() {
   const [now, setNow] = useState(() => new Date())
@@ -44,7 +44,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30 flex flex-col items-center justify-center text-white text-center px-4">
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight">East Coast Australia</h1>
           <p className="text-lg md:text-xl mt-2 opacity-90">Mai 2026</p>
-          <p className="text-sm md:text-base mt-1 opacity-75">Valentin & Nicolas — 11 jours de Byron Bay aux Whitsundays</p>
+          <p className="text-sm md:text-base mt-1 opacity-75">Valentin & Nicolas — 17 jours de Byron Bay aux Whitsundays</p>
           {countdown && (
             <div className="mt-4 flex items-center gap-3 bg-white/15 backdrop-blur-sm rounded-full px-5 py-2">
               <span className="text-2xl md:text-3xl font-bold">{countdown.days}</span>
