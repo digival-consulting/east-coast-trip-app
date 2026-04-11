@@ -646,11 +646,11 @@ export function BudgetTab() {
 
       <div className="grid md:grid-cols-3 gap-4">
         <div className="bg-white border rounded-xl p-4">
-          <h3 className="font-bold text-sm mb-3">🍽 Nourriture (11 jours, 2 pers)</h3>
+          <h3 className="font-bold text-sm mb-3">🍽 Nourriture (17 jours, 2 pers)</h3>
           {['Budget — $25/j', 'Mix — $60/j', 'Restaurant — $100/j'].map((label, i) => (
             <label key={i} className="flex items-center gap-2 py-1 text-sm cursor-pointer">
               <input type="radio" name="food" checked={foodStyle === i} onChange={() => setFoodStyle(i)} className="accent-sky-500" />
-              {label} <span className="text-slate-400 ml-auto">${foodPerDay[i] * 11}</span>
+              {label} <span className="text-slate-400 ml-auto">${foodPerDay[i] * 17}</span>
             </label>
           ))}
         </div>
