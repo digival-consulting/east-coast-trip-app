@@ -44,7 +44,7 @@ export interface Flight {
   airline: string
   from: string
   to: string
-  segment: 'syd-gc' | 'gc-ppp' | 'ppp-syd'
+  segment: 'syd-bne' | 'gc-ppp' | 'ppp-syd'
   date: string
   departure: string
   price: number
@@ -53,7 +53,7 @@ export interface Flight {
   bookingUrl: string
 }
 
-// Dates cibles : SYD→GC = 1 mai, GC→PPP = 8 mai, PPP→SYD = 11 mai
+// Dates cibles : SYD→BNE = 30 avr (CONFIRME JQ814), BNE→PPP = 8 mai (CONFIRME VA1117), PPP→SYD = 16 mai
 // Plage affichee : ±3 jours autour de chaque date cible
 
 export interface Vehicle {
@@ -232,13 +232,13 @@ export const cities: City[] = [
 ]
 
 export const itinerary: Day[] = [
-  { day: 1, date: '30 avr', title: 'Sydney → Gold Coast', cityId: 'gold-coast', caption: 'Vue aérienne de Burleigh Heads et de son headland emblématique',
+  { day: 1, date: '30 avr', title: 'Sydney → Brisbane', cityId: 'brisbane', caption: 'Départ Sydney aéroport T2, arrivée Brisbane — récupération du Kuga Campervan Travellers Autobarn',
     highlights: [
-      { time: '7h00-9h30', name: 'Vol aller Sydney → Gold Coast (Jetstar)', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: 'https://www.jetstar.com' },
-      { time: '10h30-11h30', name: 'Récupération du campervan (Camplify)', image: 'https://storage.googleapis.com/jucy-chilwa-prod-57ad03.appspot.com/Image/623cbb93_59fe_4073_9b15_dc3d44ab4438_ca591bd595/623cbb93_59fe_4073_9b15_dc3d44ab4438_ca591bd595.jpg', url: 'https://www.camplify.com.au' },
-      { time: '12h00-13h30', name: 'Burleigh Heads National Park', image: '/trip-east-coast/images/burleigh-heads.png', url: 'https://parks.des.qld.gov.au/parks/burleigh-head' },
-      { time: '14h00-15h30', name: 'Tallebudgera Creek — baignade', image: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Tallebudgera_Creek_and_mouth_with_Burleigh_headland_on_the_left.jpg', url: 'https://www.goldcoast.com.au/things-to-do/tallebudgera-creek' },
-    ], overnight: 'BIG4 Gold Coast Holiday Park', overnightUrl: 'https://www.big4.com.au/caravan-parks/qld/gold-coast/gold-coast-holiday-park', driveKm: 0 },
+      { time: '9h20-10h50', name: 'Vol Jetstar JQ814 Sydney → Brisbane (réf. GWSQTG) — CONFIRME', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: 'https://www.jetstar.com' },
+      { time: '11h30-12h30', name: 'Pickup Kuga Campervan — Travellers Autobarn (360 Nudgee Rd, Hendra) — CONFIRME', image: 'https://www.travellers-autobarn.com.au/wp-content/uploads/2024/01/AUS-Kuga-Campervan.jpg', url: 'https://www.travellers-autobarn.com.au' },
+      { time: '13h00-14h30', name: 'Drive Brisbane → Gold Coast (1h) + installation', image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gold_Coast_Highway_over_Tallebudgera_Creek.JPG', url: '' },
+      { time: '15h00-17h00', name: 'Burleigh Heads National Park — sentier côtier', image: '/trip-east-coast/images/burleigh-heads.png', url: 'https://parks.des.qld.gov.au/parks/burleigh-head' },
+    ], overnight: 'BIG4 Gold Coast Holiday Park', overnightUrl: 'https://www.big4.com.au/caravan-parks/qld/gold-coast/gold-coast-holiday-park', driveKm: 90 },
   { day: 2, date: '1 mai', title: 'Hinterland → Byron Bay', cityId: 'springbrook', caption: 'Natural Bridge : la grotte aux vers luisants de Springbrook National Park',
     highlights: [
       { time: '8h00-10h00', name: 'Natural Bridge (Springbrook)', image: '/trip-east-coast/images/springbrook.png', url: 'https://parks.des.qld.gov.au/parks/springbrook' },
@@ -280,59 +280,57 @@ export const itinerary: Day[] = [
       { time: '14h30-16h00', name: 'Mt Coot-tha Lookout', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg', url: 'https://www.visitbrisbane.com.au/mount-coot-tha' },
       { time: '18h00-20h00', name: 'Dîner Fortitude Valley', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg', url: 'https://www.visitbrisbane.com.au/fortitude-valley' },
     ], overnight: 'Camping Brisbane (van)', overnightUrl: 'https://www.bigbrisbanetouristpark.com.au', driveKm: 180 },
-  { day: 8, date: '7 mai', title: '(Option) Fraser Island — Transit', cityId: 'brisbane', caption: 'Rainbow Beach : point de départ du tour Cool Dingo vers Fraser Island',
+  { day: 8, date: '7 mai', title: 'Retour Byron → Brisbane — Dernière nuit van', cityId: 'brisbane', caption: 'Route vers Brisbane — dernière nuit avec le van avant le rendu demain matin',
     highlights: [
-      { time: '7h00-11h00', name: '(Option) Bus Greyhound Brisbane → Rainbow Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gold_Coast_Highway_over_Tallebudgera_Creek.JPG', url: 'https://www.greyhound.com.au' },
-      { time: '12h00-13h30', name: '(Option) Check-in Cool Dingo tour', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/LakeMcKenzieNov112024.jpg', url: 'https://www.cooldingotour.com' },
-      { time: '14h00-17h00', name: '(Alternative) Journée chill Brisbane — Lone Pine', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg', url: 'https://lonepinekoalasanctuary.com' },
-    ], overnight: 'Kingfisher Bay Resort (option) / Camping Brisbane', overnightUrl: 'https://www.kingfisherbay.com', driveKm: 0 },
-  { day: 9, date: '8 mai', title: '(Option) Fraser Jour 1 — Lake McKenzie', cityId: 'brisbane', caption: 'Lake McKenzie : eau turquoise et sable de silice pure sur Fraser Island',
+      { time: '9h00-11h30', name: 'Route Lennox Head → Brisbane (2h30)', image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gold_Coast_Highway_over_Tallebudgera_Creek.JPG', url: '' },
+      { time: '12h00-14h00', name: 'Lone Pine Koala Sanctuary', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg', url: 'https://lonepinekoalasanctuary.com' },
+      { time: '14h30-17h00', name: 'South Bank Parklands + Streets Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg', url: 'https://www.visitbrisbane.com.au/south-bank' },
+      { time: '19h00-21h00', name: 'Dernier dîner Brisbane — Fortitude Valley', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg', url: 'https://www.visitbrisbane.com.au/fortitude-valley' },
+    ], overnight: 'Camping Brisbane (van) — dernière nuit', overnightUrl: 'https://www.bigbrisbanetouristpark.com.au', driveKm: 180 },
+  { day: 9, date: '8 mai', title: 'Rendu van + Vol BNE → PPP 12h45', cityId: 'airlie', caption: 'Retour du Kuga Campervan à Hendra, vol Virgin VA1117 vers Proserpine — début Phase 2',
     highlights: [
-      { time: '8h00-10h30', name: '(Option) Lake McKenzie — baignade eau douce', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/LakeMcKenzieNov112024.jpg', url: 'https://www.cooldingotour.com' },
-      { time: '11h00-13h00', name: '(Option) Central Station — forêt tropicale', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/LakeMcKenzieNov112024.jpg', url: '' },
-      { time: '14h30-17h00', name: '(Alternative) Brisbane — South Bank + shopping Queen St', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg', url: '' },
-    ], overnight: 'Eurong Beach Resort (option) / Camping Brisbane', overnightUrl: 'https://www.eurong.com.au', driveKm: 0 },
-  { day: 10, date: '9 mai', title: '(Option) Fraser Jour 2 — Maheno & Eli Creek', cityId: 'brisbane', caption: 'L\'épave du SS Maheno sur 75 Mile Beach, Fraser Island',
+      { time: '8h30-10h00', name: 'Rendu Kuga Campervan — Travellers Autobarn (360 Nudgee Rd, Hendra)', image: 'https://www.travellers-autobarn.com.au/wp-content/uploads/2024/01/AUS-Kuga-Campervan.jpg', url: 'https://www.travellers-autobarn.com.au' },
+      { time: '10h30-12h15', name: 'Transfert Hendra → Brisbane Airport (taxi/Uber)', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: '' },
+      { time: '12h45-14h35', name: 'Vol Virgin VA1117 BNE → PPP (réf. NYPCJY) — CONFIRME', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: 'https://www.virginaustralia.com' },
+      { time: '15h00-16h30', name: 'Shuttle PPP → Airlie Beach + check-in hostel', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.whitsundaytransit.com.au' },
+    ], overnight: 'Hostel Airlie Beach (à réserver)', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
+  { day: 10, date: '9 mai', title: 'Whitehaven Beach — Ocean Rafting', cityId: 'whitsundays', caption: 'Hill Inlet et Whitehaven Beach — le sable de silice pure le plus blanc du monde',
     highlights: [
-      { time: '8h00-10h00', name: '(Option) SS Maheno wreck + 75 Mile Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/StateLibQld_1_256139_Maheno%2C_the_steamship_whose_hull_now_lies_rusting_on_the_beach_at_Fraser_Island%2C_ca._1905.jpg', url: '' },
-      { time: '10h30-12h00', name: '(Option) Eli Creek — ruisseau cristallin', image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/StateLibQld_1_256139_Maheno%2C_the_steamship_whose_hull_now_lies_rusting_on_the_beach_at_Fraser_Island%2C_ca._1905.jpg', url: '' },
-      { time: '13h00-15h00', name: '(Option) Champagne Pools', image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/StateLibQld_1_256139_Maheno%2C_the_steamship_whose_hull_now_lies_rusting_on_the_beach_at_Fraser_Island%2C_ca._1905.jpg', url: '' },
-      { time: '16h00-19h00', name: '(Option) Retour bus Rainbow Beach → Brisbane', image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gold_Coast_Highway_over_Tallebudgera_Creek.JPG', url: 'https://www.greyhound.com.au' },
-    ], overnight: 'Camping Brisbane (van)', overnightUrl: 'https://www.bigbrisbanetouristpark.com.au', driveKm: 0 },
-  { day: 11, date: '10 mai', title: 'Retour Gold Coast — rendu van', cityId: 'gold-coast', caption: 'Snapper Rocks et Rainbow Bay — dernière session surf avant le vol',
+      { time: '7h30-17h00', name: 'Ocean Rafting full day — Hill Inlet + Whitehaven Beach + snorkel', image: '/trip-east-coast/images/whitehaven-aerial.png', url: 'https://www.oceanrafting.com.au' },
+      { time: '17h30-19h00', name: 'Retour Airlie Beach + récupération', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: '' },
+    ], overnight: 'Hostel Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
+  { day: 11, date: '10 mai', title: 'Airlie Beach — Exploration + Prépa PADI', cityId: 'airlie', caption: 'Journée libre à Airlie Beach — lagoon, promenade côtière, briefing opérateur PADI',
     highlights: [
-      { time: '9h00-11h00', name: 'Route Brisbane → Gold Coast (1h)', image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gold_Coast_Highway_over_Tallebudgera_Creek.JPG', url: '' },
-      { time: '11h30-13h00', name: 'Dernière session surf Snapper Rocks', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Snapper_Rocks%2C_Coolangatta%2C_Australia_%28Unsplash%29.jpg', url: '' },
-      { time: '14h00-15h00', name: 'Rendu du campervan Camplify', image: 'https://storage.googleapis.com/jucy-chilwa-prod-57ad03.appspot.com/Image/623cbb93_59fe_4073_9b15_dc3d44ab4438_ca591bd595/623cbb93_59fe_4073_9b15_dc3d44ab4438_ca591bd595.jpg', url: 'https://www.camplify.com.au' },
-      { time: '16h00-18h00', name: 'Transfert Gold Coast → Brisbane (train)', image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Gold_Coast_Highway_over_Tallebudgera_Creek.JPG', url: 'https://translink.com.au' },
-    ], overnight: 'Hostel Brisbane aéroport', overnightUrl: '', driveKm: 100 },
-  { day: 12, date: '11 mai', title: 'Vol Brisbane → Whitsundays', cityId: 'airlie', caption: 'L\'Airlie Beach Lagoon : piscine tropicale gratuite face à la marina',
+      { time: '8h00-10h00', name: 'Airlie Beach Lagoon — baignade matinale', image: '/trip-east-coast/images/airlie-beach.png', url: 'https://www.airliebeach.com/things-to-do/airlie-beach-lagoon' },
+      { time: '10h30-12h00', name: 'Bicentennial Walkway — promenade côtière avec vue sur les îles', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.airliebeach.com' },
+      { time: '14h00-15h30', name: 'Briefing opérateur PADI + inscription course', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://www.prodivewhitsundays.com.au' },
+    ], overnight: 'Hostel Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
+  { day: 12, date: '11 mai', title: 'PADI Jour 1 — Théorie & Confined water', cityId: 'airlie', caption: 'Théorie PADI et plongées confinées en piscine — première journée de formation',
     highlights: [
-      { time: '8h00-9h30', name: 'Vol Brisbane → Proserpine', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: 'https://www.jetstar.com' },
-      { time: '10h00-11h00', name: 'Shuttle aéroport → Airlie Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.whitsundaytransit.com.au' },
-      { time: '12h00-14h00', name: 'Airlie Beach Lagoon', image: '/trip-east-coast/images/airlie-beach.png', url: 'https://www.airliebeach.com/things-to-do/airlie-beach-lagoon' },
-      { time: '18h00-20h00', name: 'Briefing PADI Open Water', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://redcatadventures.com.au' },
-    ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
-  { day: 13, date: '12 mai', title: 'Whitehaven Beach', cityId: 'whitsundays', caption: 'Vue aérienne de Hill Inlet — le sable blanc et l\'eau turquoise des Whitsundays',
+      { time: '8h00-12h00', name: 'Théorie PADI + vidéos + knowledge reviews', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.prodivewhitsundays.com.au' },
+      { time: '13h00-17h00', name: 'Confined water — exercices piscine (5 compétences)', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://www.prodivewhitsundays.com.au' },
+    ], overnight: 'Hostel Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
+  { day: 13, date: '12 mai', title: 'PADI Jour 2 — Liveaboard départ', cityId: 'gbr', caption: 'Départ du liveaboard pour la Grande Barrière de Corail — 2 premières plongées open water',
     highlights: [
-      { time: '7h30-17h00', name: 'Ocean Rafting full day — Hill Inlet + Whitehaven + snorkel', image: '/trip-east-coast/images/whitehaven-aerial.png', url: 'https://www.oceanrafting.com.au' },
-    ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
-  { day: 14, date: '13 mai', title: 'PADI Jour 1 — Théorie & confined', cityId: 'airlie', caption: 'Centre de plongée PADI à Airlie Beach : théorie et piscine',
-    highlights: [
-      { time: '8h00-12h00', name: 'Théorie PADI + vidéos', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://redcatadventures.com.au' },
-      { time: '13h00-17h00', name: 'Confined water — exercices piscine', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://redcatadventures.com.au' },
-    ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
-  { day: 15, date: '14 mai', title: 'PADI Jour 2 — Liveaboard', cityId: 'gbr', caption: 'Liveaboard sur la Grande Barrière de Corail — plongées de certification',
-    highlights: [
-      { time: '7h00-20h00', name: 'Départ liveaboard — 2 plongées certification', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://redcatadventures.com.au' },
+      { time: '7h00-20h00', name: 'Liveaboard départ — 2 plongées open water sur le récif', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://www.prodivewhitsundays.com.au' },
       { time: '20h00-22h00', name: 'Nuit à bord sous les étoiles', image: '/trip-east-coast/images/great-barrier-reef.png', url: '' },
-    ], overnight: 'Liveaboard (nuit à bord)', overnightUrl: 'https://redcatadventures.com.au', driveKm: 0 },
-  { day: 16, date: '15 mai', title: 'PADI Jour 3 & Vol Heart Reef', cityId: 'gbr', caption: 'Heart Reef vu du ciel — le récif en forme de coeur iconique',
+    ], overnight: 'Liveaboard (nuit à bord)', overnightUrl: 'https://www.prodivewhitsundays.com.au', driveKm: 0 },
+  { day: 14, date: '13 mai', title: 'PADI Jour 3 — Certification Open Water', cityId: 'gbr', caption: '2 dernières plongées de certification sur la Grande Barrière de Corail',
     highlights: [
-      { time: '7h00-12h00', name: '2 plongées finales + certification PADI Open Water', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://redcatadventures.com.au' },
-      { time: '14h00-15h00', name: 'Retour Airlie Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: '' },
-      { time: '16h00-17h00', name: 'Vol panoramique Heart Reef', image: '/trip-east-coast/images/helicopter-whitsundays.png', url: 'https://www.gslaviation.com.au' },
-    ], overnight: 'Nomads Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
+      { time: '7h00-12h00', name: '2 plongées finales + certification PADI Open Water officielle', image: '/trip-east-coast/images/great-barrier-reef.png', url: 'https://www.prodivewhitsundays.com.au' },
+      { time: '13h00-15h00', name: 'Retour Airlie Beach', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: '' },
+    ], overnight: 'Hostel Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
+  { day: 15, date: '14 mai', title: 'Airlie Beach — Jour libre', cityId: 'airlie', caption: 'Repos post-plongée — plage, lagoon, récupération de la carte PADI',
+    highlights: [
+      { time: '9h00-11h00', name: 'Récupération + Airlie Beach Lagoon', image: '/trip-east-coast/images/airlie-beach.png', url: 'https://www.airliebeach.com/things-to-do/airlie-beach-lagoon' },
+      { time: '14h00-16h00', name: 'Jet ski tour 1h (optionnel)', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.whitsundayjetski.com.au' },
+    ], overnight: 'Hostel Airlie Beach', overnightUrl: 'https://nomadsworld.com/australia/airlie-beach', driveKm: 0 },
+  { day: 16, date: '15 mai', title: 'Vol panoramique Heart Reef + Aéroport', cityId: 'airlie', caption: 'Heart Reef vu du ciel — puis transfert Proserpine Airport pour le retour à Sydney',
+    highlights: [
+      { time: '9h00-10h30', name: 'Vol panoramique Heart Reef (GSL Aviation)', image: '/trip-east-coast/images/helicopter-whitsundays.png', url: 'https://www.gslaviation.com.au' },
+      { time: '11h30-13h00', name: 'Déjeuner Airlie Beach + packing', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: '' },
+      { time: '14h00-15h00', name: 'Shuttle Airlie Beach → Proserpine Airport', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Airport.JPG', url: 'https://www.whitsundaytransit.com.au' },
+    ], overnight: '—', overnightUrl: '', driveKm: 0 },
   { day: 17, date: '16 mai', title: 'Vol retour Sydney', cityId: 'airlie', caption: 'Fin du trip — vol Proserpine → Sydney, retour à la maison',
     highlights: [
       { time: '9h00-10h00', name: 'Shuttle → aéroport Proserpine', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Airlie_Beach_Lagoon.JPG', url: 'https://www.whitsundaytransit.com.au' },
@@ -344,21 +342,21 @@ export const itinerary: Day[] = [
 type FlightTemplate = { airline: string; from: string; to: string; segment: Flight['segment']; duration: string; baggageIncluded: boolean; bookingUrl: string; departures: string[]; basePrice: number; targetDateIdx: number }
 
 const segmentDates: Record<string, string[]> = {
-  'syd-gc': ['27 avr', '28 avr', '29 avr', '30 avr', '1 mai', '2 mai', '3 mai'],
-  'gc-ppp': ['8 mai', '9 mai', '10 mai', '11 mai', '12 mai', '13 mai', '14 mai'],
+  'syd-bne': ['27 avr', '28 avr', '29 avr', '30 avr', '1 mai', '2 mai', '3 mai'],
+  'gc-ppp': ['5 mai', '6 mai', '7 mai', '8 mai', '9 mai', '10 mai', '11 mai'],
   'ppp-syd': ['13 mai', '14 mai', '15 mai', '16 mai', '17 mai', '18 mai', '19 mai'],
 }
-export const segmentTargetDates: Record<string, string> = { 'syd-gc': '30 avr', 'gc-ppp': '11 mai', 'ppp-syd': '16 mai' }
+export const segmentTargetDates: Record<string, string> = { 'syd-bne': '30 avr', 'gc-ppp': '8 mai', 'ppp-syd': '16 mai' }
 
 const templates: FlightTemplate[] = [
-  // SYD → GC
-  { airline: 'Jetstar', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', duration: '1h25', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com', departures: ['06:00', '10:30', '15:00', '19:30'], basePrice: 49, targetDateIdx: 3 },
-  { airline: 'Virgin Australia', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', duration: '1h25', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com', departures: ['07:15', '12:00', '17:30'], basePrice: 79, targetDateIdx: 3 },
-  { airline: 'Qantas', from: 'Sydney (SYD)', to: 'Gold Coast (OOL)', segment: 'syd-gc', duration: '1h25', baggageIncluded: true, bookingUrl: 'https://www.qantas.com', departures: ['08:00', '13:30', '18:00'], basePrice: 99, targetDateIdx: 3 },
-  // GC → PPP
+  // SYD → BNE (CONFIRME : Jetstar JQ814, 30 avr 9h20, réf GWSQTG)
+  { airline: 'Jetstar', from: 'Sydney (SYD)', to: 'Brisbane (BNE)', segment: 'syd-bne', duration: '1h30', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com', departures: ['06:00', '09:20', '15:00', '19:30'], basePrice: 89, targetDateIdx: 3 },
+  { airline: 'Virgin Australia', from: 'Sydney (SYD)', to: 'Brisbane (BNE)', segment: 'syd-bne', duration: '1h35', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com', departures: ['07:15', '12:00', '17:30'], basePrice: 119, targetDateIdx: 3 },
+  { airline: 'Qantas', from: 'Sydney (SYD)', to: 'Brisbane (BNE)', segment: 'syd-bne', duration: '1h30', baggageIncluded: true, bookingUrl: 'https://www.qantas.com', departures: ['08:00', '13:30', '18:00'], basePrice: 139, targetDateIdx: 3 },
+  // BNE → PPP (CONFIRME : Virgin VA1117, 8 mai 12h45, réf NYPCJY)
   { airline: 'Jetstar', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', duration: '1h30', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com', departures: ['07:00', '14:00'], basePrice: 69, targetDateIdx: 3 },
-  { airline: 'Virgin Australia', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', duration: '1h20', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com', departures: ['08:30', '16:00'], basePrice: 89, targetDateIdx: 3 },
-  { airline: 'Qantas', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', duration: '1h20', baggageIncluded: true, bookingUrl: 'https://www.qantas.com', departures: ['09:00'], basePrice: 129, targetDateIdx: 3 },
+  { airline: 'Virgin Australia', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', duration: '1h50', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com', departures: ['09:15', '12:45'], basePrice: 89, targetDateIdx: 3 },
+  { airline: 'Qantas', from: 'Brisbane (BNE)', to: 'Proserpine (PPP)', segment: 'gc-ppp', duration: '1h50', baggageIncluded: true, bookingUrl: 'https://www.qantas.com', departures: ['09:00'], basePrice: 129, targetDateIdx: 3 },
   // PPP → SYD
   { airline: 'Jetstar', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', duration: '2h15', baggageIncluded: false, bookingUrl: 'https://www.jetstar.com', departures: ['08:00', '15:30'], basePrice: 89, targetDateIdx: 3 },
   { airline: 'Virgin Australia', from: 'Proserpine (PPP)', to: 'Sydney (SYD)', segment: 'ppp-syd', duration: '2h15', baggageIncluded: true, bookingUrl: 'https://www.virginaustralia.com', departures: ['10:00', '17:00'], basePrice: 119, targetDateIdx: 3 },

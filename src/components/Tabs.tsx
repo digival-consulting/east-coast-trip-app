@@ -43,10 +43,10 @@ function WarningTooltip({ text }: { text: string }) {
 
 // ==================== CONFIRMÉ ====================
 const confirmedPart1 = [
-  { day: 'J0 — 30 avr', title: 'Vol Sydney → Gold Coast', camp: '—', campPrice: 0, campUrl: '', activities: [
-    { name: 'Vol Jetstar SYD→OOL 07h00', price: 49, status: 'confirme' as const, url: 'https://www.jetstar.com' },
-    { name: 'Pickup campervan Gold Coast Airport', price: 0, status: 'confirme' as const, url: 'https://www.camplify.com.au/rv/152484' },
-    { name: 'Installation + courses supermarche', price: 60, status: 'estime' as const, url: '' },
+  { day: 'J0 — 30 avr', title: 'Vol Sydney → Brisbane', camp: '—', campPrice: 0, campUrl: '', activities: [
+    { name: 'Vol Jetstar JQ814 SYD→BNE 09h20 (réf. GWSQTG, $147.76/pers)', price: 148, status: 'confirme' as const, url: 'https://www.jetstar.com' },
+    { name: 'Pickup Kuga Campervan — Travellers Autobarn Brisbane Hendra (réf. U-154730)', price: 0, status: 'confirme' as const, url: 'https://www.travellers-autobarn.com.au' },
+    { name: 'Drive Brisbane → Gold Coast + installation + courses', price: 60, status: 'estime' as const, url: '' },
   ]},
   { day: 'J1 — 1 mai', title: 'Gold Coast / Burleigh Heads', camp: 'BIG4 Gold Coast Holiday Park', campPrice: 50, campUrl: 'https://www.big4.com.au/caravan-parks/qld/gold-coast/gold-coast-holiday-park', activities: [
     { name: 'Burleigh Heads National Park (rando)', price: 0, status: 'estime' as const, url: 'https://parks.des.qld.gov.au/parks/burleigh-head' },
@@ -84,32 +84,40 @@ const confirmedPart1 = [
     { name: 'Lennox Head surf', price: 0, status: 'estime' as const, url: 'https://www.visitnsw.com/destinations/north-coast/ballina-area/lennox-head' },
     { name: 'Repas', price: 60, status: 'estime' as const, url: '' },
   ]},
-  { day: 'J7 — 7 mai', title: 'Retour Gold Coast → Brisbane', camp: '—', campPrice: 0, campUrl: '', activities: [
-    { name: 'Coolangatta / Snapper Rocks (matin)', price: 0, status: 'estime' as const, url: 'https://www.goldcoast.com.au/things-to-do/coolangatta' },
-    { name: 'Drive Gold Coast → Brisbane (1h)', price: 0, status: 'estime' as const, url: '' },
-    { name: 'Brisbane : South Bank, GOMA, Eat Street', price: 30, status: 'estime' as const, url: 'https://www.visitbrisbane.com.au/south-bank' },
-    { name: 'Repas Brisbane', price: 70, status: 'estime' as const, url: '' },
+  { day: 'J7 — 7 mai', title: 'Retour Byron Bay → Brisbane', camp: 'Camping Brisbane (van) — dernière nuit', campPrice: 30, campUrl: 'https://www.bigbrisbanetouristpark.com.au', activities: [
+    { name: 'Drive Lennox Head → Brisbane (2h30)', price: 0, status: 'estime' as const, url: '' },
+    { name: 'Lone Pine Koala Sanctuary', price: 49, status: 'estime' as const, url: 'https://lonepinekoalasanctuary.com' },
+    { name: 'South Bank Parklands + Streets Beach', price: 0, status: 'estime' as const, url: 'https://www.visitbrisbane.com.au/south-bank' },
+    { name: 'Repas Brisbane — Fortitude Valley', price: 70, status: 'estime' as const, url: '' },
+  ]},
+  { day: 'J8 — 8 mai', title: 'Rendu van + Vol BNE → PPP', camp: '—', campPrice: 0, campUrl: '', activities: [
+    { name: 'Rendu Kuga Campervan Travellers Autobarn (360 Nudgee Rd, Hendra)', price: 0, status: 'confirme' as const, url: 'https://www.travellers-autobarn.com.au' },
+    { name: 'Vol Virgin VA1117 BNE→PPP 12h45 (réf. NYPCJY) — CONFIRME', price: 0, status: 'confirme' as const, url: 'https://www.virginaustralia.com' },
+    { name: 'Shuttle PPP → Airlie Beach (Whitsunday Transit)', price: 22, status: 'estime' as const, url: 'https://www.whitsundaytransit.com.au' },
+    { name: 'Check-in hostel Airlie Beach', price: 0, status: 'estime' as const, url: 'https://nomadsworld.com/australia/airlie-beach' },
   ]},
 ]
 
 const bookingUrgencies = [
+  { priority: 'CONFIRME', color: 'bg-green-600', items: [
+    { what: 'Vol Jetstar JQ814 SYD→BNE 30 avr 9h20 (réf. GWSQTG)', when: 'CONFIRME — $147.76/pers', why: 'Boarding pass dispo 48h avant. Check-in online.', url: 'https://www.jetstar.com' },
+    { what: 'Kuga Campervan Travellers Autobarn Brisbane (réf. U-154730)', when: 'CONFIRME — $1,352 total', why: 'Pickup 30 avr 10h, dropoff 8 mai 15h. Solde $841 a la reprise.', url: 'https://www.travellers-autobarn.com.au' },
+    { what: 'Vol Virgin VA1117 BNE→PPP 8 mai 12h45 (réf. NYPCJY)', when: 'CONFIRME — siege 21A', why: 'Retourner le van avant 12h le 8 mai pour etre a l\'aeroport.', url: 'https://www.virginaustralia.com' },
+  ]},
   { priority: 'URGENT', color: 'bg-red-500', items: [
-    { what: 'Vol Jetstar SYD→OOL 30 avril', when: 'Reserver MAINTENANT', why: 'Prix augmentent chaque semaine, places limitees en early morning', url: 'https://www.jetstar.com' },
-    { what: 'Campervan Camplify', when: 'Reserver MAINTENANT', why: 'Saison haute, les bons vans partent en 48h', url: 'https://www.camplify.com.au/rv/152484' },
-    { what: 'Tour Fraser Island 2j/1n', when: 'Avant le 15 avril', why: 'Tours complets 2-3 semaines avant en mai', url: 'https://www.cooldingo.com.au' },
+    { what: 'Vol PPP→SYD retour (16 mai ou autre date)', when: 'MAINTENANT — voyage dans 2 semaines', why: 'Peu de vols directs PPP→SYD, prix explosent. Virgin + Jetstar. Fixer la date de retour.', url: 'https://www.virginaustralia.com' },
+    { what: 'Hostel Airlie Beach — au moins J8 a J13 (8-13 mai)', when: 'MAINTENANT', why: 'Nomads et Magnums se remplissent vite en mai. Minimum 5 nuits.', url: 'https://nomadsworld.com/australia/airlie-beach' },
+    { what: 'PADI Open Water Airlie Beach — choisir operateur', when: 'MAINTENANT — places limitees', why: '4-6 stagiaires max par instructeur. Wings Diving et Pro Dive bookkent semaines a l\'avance.', url: 'https://www.prodivewhitsundays.com.au' },
   ]},
   { priority: 'BIENTOT', color: 'bg-amber-500', items: [
-    { what: 'Liveaboard Whitsundays + PADI', when: '2-3 semaines avant (mi-avril)', why: 'Places PADI limitees a 4-6 par bateau', url: 'https://www.wingsdiving.com.au' },
-    { what: 'Vol BNE→PPP', when: '2-3 semaines avant', why: 'Peu de vols directs, prix doublent a J-7', url: 'https://www.jetstar.com' },
-    { what: 'Vol PPP→SYD retour', when: '2-3 semaines avant', why: 'Meme raison — segment peu desservi', url: 'https://www.jetstar.com' },
-    { what: 'Hostel Airlie Beach', when: '2-3 semaines avant', why: 'Nomads et YHA remplissent vite en mai', url: 'https://nomadsworld.com/australia/airlie-beach' },
+    { what: 'Ocean Rafting — Whitehaven Beach (9 mai)', when: 'Avant le 25 avril', why: 'Excursion tres populaire, groupes limites. Reserver tôt matin preferably.', url: 'https://www.oceanrafting.com.au' },
+    { what: 'Vol panoramique Heart Reef (optionnel)', when: '1-2 semaines avant', why: 'Places disponibles, mais pas open-ended non plus.', url: 'https://www.gslaviation.com.au' },
   ]},
   { priority: 'TRANQUILLE', color: 'bg-green-500', items: [
     { what: 'Holiday Parks Byron region', when: '1-2 semaines avant', why: 'Camping van = flexible, walk-in possible en basse saison', url: 'https://www.big4.com.au' },
     { what: 'Surf lesson Byron Bay', when: '1 semaine avant ou sur place', why: 'Departs toutes les heures, jamais complet', url: 'https://mojosurf.com/byron-bay' },
     { what: 'Kayak dauphins Byron', when: '2-3 jours avant', why: 'Reserve en fonction de la meteo', url: 'https://www.capebayronkayaks.com' },
     { what: 'Crystal Castle', when: 'Sur place', why: 'Billets a l\'entree, jamais complet', url: 'https://crystalcastle.com.au' },
-    { what: 'Bus Greyhound Brisbane→Hervey Bay', when: '1 semaine avant', why: 'Bus frequents, rarement complet', url: 'https://www.greyhound.com.au' },
   ]},
 ]
 
@@ -132,6 +140,66 @@ const fraserSimulation = {
   ],
   note: 'Le van reste gare a Brisbane (parking Wilson ou similaire ~$15/j). On fait Fraser en tour organise (4WD, camping, guide, repas inclus). Retour a Brisbane pour recuperer le van et le rendre a Gold Coast.',
 }
+
+const padiOperators = [
+  {
+    name: 'Pro Dive Whitsundays',
+    type: 'Shore + bateau (3 jours)',
+    includes: 'Théorie + confined water + 4 plongées récif extérieur + certification',
+    price: '$650–$750',
+    note: 'Option la plus populaire. Petits groupes (6 max). Récif extérieur = meilleures conditions.',
+    url: 'https://www.prodivewhitsundays.com.au',
+    highlight: false,
+  },
+  {
+    name: 'Wings Sailing Adventures',
+    type: 'Liveaboard voilier 3j / 2 nuits',
+    includes: 'PADI + nuits à bord + repas + Whitehaven Beach + plongées Great Barrier Reef',
+    price: '$900–$1,100',
+    note: 'Tout-en-un : PADI + Whitehaven + nuits en mer. Économise 2-3 nuits d\'hostel. Très recommandé si budget OK.',
+    url: 'https://www.wingsdiving.com.au',
+    highlight: true,
+  },
+  {
+    name: 'Ocean Dynamics',
+    type: 'Shore + bateau (3 jours)',
+    includes: 'PADI Open Water complet + 4 plongées + certification',
+    price: '$680–$780',
+    note: 'Centre PADI 5 étoiles. Instructeurs locaux certifiés. Option e-Learning en amont possible.',
+    url: 'https://www.oceandynamics.com.au',
+    highlight: false,
+  },
+]
+
+const airlieHostels = [
+  {
+    name: 'Nomads Airlie Beach',
+    type: 'Hostel social — piscine + bar',
+    dorm: '$35–$55',
+    double: '$90–$130',
+    note: 'Ambiance backpacker, piscine, au coeur de la ville. Recommandé pour rencontrer des gens.',
+    url: 'https://nomadsworld.com/australia/airlie-beach',
+    highlight: true,
+  },
+  {
+    name: 'Magnums Hotel & Backpackers',
+    type: 'Hostel + hôtel — bar légendaire',
+    dorm: '$30–$50',
+    double: '$95–$130',
+    note: 'Spot incontournable d\'Airlie Beach, bar populaire le soir. Un peu plus bruyant.',
+    url: 'https://www.magnums.com.au',
+    highlight: false,
+  },
+  {
+    name: 'Backpackers by the Bay (YHA)',
+    type: 'Hostel calme — vue sur la baie',
+    dorm: '$32–$48',
+    double: '$85–$115',
+    note: 'Plus calme que Nomads/Magnums, vue sur la mer, cuisine bien équipée. Idéal pour les jours PADI.',
+    url: 'https://www.yha.com.au/hostels/qld/whitsundays/backpackers-by-the-bay/',
+    highlight: false,
+  },
+]
 
 const whitsundaysPadi = {
   title: 'Whitsundays + PADI Open Water',
@@ -191,8 +259,8 @@ const whitsundaysPadi = {
 
 export function ConfirmeTab() {
   // Part 1 totals
-  const vanPrice = 1200
-  const flightPrice = 49 * 2 // 2 personnes
+  const vanPrice = 1352  // Travellers Autobarn Kuga 9 jours, total confirmé (réf U-154730)
+  const flightPrice = 296 // Jetstar JQ814 SYD→BNE x2 ($147.76/pers, réf GWSQTG) // 2 personnes
   const campTotal = confirmedPart1.reduce((s, d) => s + d.campPrice, 0)
   const actTotal = confirmedPart1.reduce((s, d) => s + d.activities.reduce((a, act) => a + act.price, 0), 0)
   const actTotalX2 = confirmedPart1.reduce((s, d) => s + d.activities.reduce((a, act) => a + (act.name.includes('Repas') || act.name.includes('courses') ? act.price : act.price * 2), 0), 0)
@@ -209,32 +277,50 @@ export function ConfirmeTab() {
         <p className="text-slate-500 text-sm mt-1">Vol + Van + Camps + Activites au prix moyen, pour 2 personnes.</p>
       </div>
 
-      {/* Vol confirme */}
+      {/* Vol 1 confirme */}
       <div className="bg-green-50 border border-green-200 rounded-xl p-4">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-bold px-2 py-1 rounded bg-green-500 text-white">CONFIRME</span>
-          <span className="font-bold">Vol aller — 30 avril 2026</span>
+          <span className="text-xs font-bold px-2 py-1 rounded bg-green-600 text-white">CONFIRME</span>
+          <span className="font-bold">Vol aller — Jetstar JQ814 — 30 avril 2026</span>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-          <div><span className="text-slate-400">Compagnie</span><div className="font-medium">Jetstar</div></div>
-          <div><span className="text-slate-400">Trajet</span><div className="font-medium">SYD → OOL</div></div>
-          <div><span className="text-slate-400">Depart</span><div className="font-medium">07h00</div></div>
-          <div><span className="text-slate-400">Prix (x2)</span><div className="font-bold text-green-600">${flightPrice}</div></div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+          <div><span className="text-slate-400">Trajet</span><div className="font-medium">SYD → BNE</div></div>
+          <div><span className="text-slate-400">Depart / Arrivee</span><div className="font-medium">09h20 → 10h50</div></div>
+          <div><span className="text-slate-400">Duree</span><div className="font-medium">1h30 (A321neo)</div></div>
+          <div><span className="text-slate-400">Ref booking</span><div className="font-bold font-mono text-green-700">GWSQTG</div></div>
+          <div><span className="text-slate-400">Prix (x2 pers)</span><div className="font-bold text-green-600">${flightPrice}</div></div>
         </div>
       </div>
 
       {/* Van confirme */}
       <div className="bg-green-50 border border-green-200 rounded-xl p-4">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs font-bold px-2 py-1 rounded bg-green-500 text-white">CONFIRME</span>
-          <span className="font-bold">Campervan — 7 jours</span>
+          <span className="text-xs font-bold px-2 py-1 rounded bg-green-600 text-white">CONFIRME</span>
+          <span className="font-bold">Kuga Campervan — Travellers Autobarn — 9 jours</span>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-          <div><span className="text-slate-400">Pickup</span><div className="font-medium">Gold Coast Airport</div></div>
-          <div><span className="text-slate-400">Rendu</span><div className="font-medium">Gold Coast Airport</div></div>
-          <div><span className="text-slate-400">Duree</span><div className="font-medium">30 avr → 7 mai</div></div>
-          <div><span className="text-slate-400">Prix total</span><div className="font-bold text-green-600">${vanPrice}</div></div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+          <div><span className="text-slate-400">Pickup</span><div className="font-medium">Brisbane (Hendra)</div></div>
+          <div><span className="text-slate-400">Dropoff</span><div className="font-medium">Brisbane (Hendra)</div></div>
+          <div><span className="text-slate-400">Periode</span><div className="font-medium">30 avr → 8 mai</div></div>
+          <div><span className="text-slate-400">Ref booking</span><div className="font-bold font-mono text-green-700">U-154730</div></div>
+          <div><span className="text-slate-400">Total confirme</span><div className="font-bold text-green-600">${vanPrice} <span className="text-xs font-normal text-slate-500">(solde $841 au pickup)</span></div></div>
         </div>
+      </div>
+
+      {/* Vol 2 confirme */}
+      <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-green-600 text-white">CONFIRME</span>
+          <span className="font-bold">Vol Phase 2 — Virgin Australia VA1117 — 8 mai 2026</span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
+          <div><span className="text-slate-400">Trajet</span><div className="font-medium">BNE → PPP</div></div>
+          <div><span className="text-slate-400">Depart / Arrivee</span><div className="font-medium">12h45 → 14h35</div></div>
+          <div><span className="text-slate-400">Duree</span><div className="font-medium">1h50 (737-800)</div></div>
+          <div><span className="text-slate-400">Ref booking</span><div className="font-bold font-mono text-green-700">NYPCJY</div></div>
+          <div><span className="text-slate-400">Siege</span><div className="font-medium">21A (Valentin)</div></div>
+        </div>
+        <p className="text-xs text-amber-700 mt-2 bg-amber-50 rounded px-2 py-1">Contrainte : rendre le van avant 12h00 le 8 mai pour rejoindre Brisbane Airport.</p>
       </div>
 
       {/* Planning reservations */}
@@ -313,61 +399,91 @@ export function ConfirmeTab() {
       <div className="bg-gradient-to-r from-sky-500 to-cyan-500 text-white rounded-xl p-6">
         <h3 className="font-bold text-lg mb-4">Total Partie 1 — Byron Region (2 personnes)</h3>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
-          <div className="text-center"><div className="opacity-75">Vol</div><div className="text-xl font-bold">${flightPrice}</div></div>
-          <div className="text-center"><div className="opacity-75">Van 7j</div><div className="text-xl font-bold">${vanPrice}</div></div>
+          <div className="text-center"><div className="opacity-75">Vols (SYD+BNE)</div><div className="text-xl font-bold">${flightPrice}</div></div>
+          <div className="text-center"><div className="opacity-75">Van 9j</div><div className="text-xl font-bold">${vanPrice}</div></div>
           <div className="text-center"><div className="opacity-75">Camps ({confirmedPart1.filter(d => d.campPrice > 0).length} nuits)</div><div className="text-xl font-bold">${campTotal}</div></div>
           <div className="text-center"><div className="opacity-75">Activites + repas</div><div className="text-xl font-bold">${actTotalX2}</div></div>
           <div className="text-center border-l border-white/30"><div className="opacity-75">TOTAL</div><div className="text-2xl font-bold">${part1Total}</div><div className="text-xs opacity-75">${Math.round(part1Total / 2)}/pers</div></div>
         </div>
       </div>
 
-      {/* ==================== FRASER ISLAND ==================== */}
-      <div className="border-t-2 border-amber-300 pt-6">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-xs font-bold px-2 py-1 rounded bg-amber-500 text-white">SIMULATION</span>
-          <h2 className="text-2xl font-bold">{fraserSimulation.title}</h2>
+      {/* ==================== FRASER ISLAND — AU CAS OU ==================== */}
+      <div className="border-t-2 border-slate-200 pt-6 opacity-50">
+        <div className="flex items-center gap-3 mb-3">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-slate-400 text-white">AU CAS OU</span>
+          <h2 className="text-xl font-bold text-slate-400 line-through">{fraserSimulation.title}</h2>
         </div>
-        <p className="text-slate-500 text-sm mb-4">{fraserSimulation.duration} — Tour guide 4WD, pas d'avion. Van gare a Brisbane pendant Fraser.</p>
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm text-slate-500">
+          <p className="font-medium text-slate-600 mb-1">Option abandonnee pour ce voyage (avril 2026)</p>
+          <p>Le van Travellers Autobarn part et revient de Brisbane, avec rendu le 8 mai matin pour le vol BNE→PPP 12h45. Fraser Island n&apos;est plus compatible avec ce planning.</p>
+          <p className="mt-2">Conservé ici au cas où les dates changent. {fraserSimulation.duration} — Budget estimé : ~${fraserTotalX2} pour 2 personnes.</p>
+        </div>
+      </div>
 
-        <div className="space-y-2 mb-4">
-          {fraserSimulation.itinerary.map((step, i) => (
-            <div key={i} className="border rounded-lg p-3 bg-amber-50/50">
-              <span className="text-xs font-bold text-amber-700">{step.day}</span>
-              <p className="text-sm mt-0.5">{step.desc}</p>
+      {/* ==================== PADI OPERATEURS AIRLIE BEACH ==================== */}
+      <div className="border-t-2 border-cyan-300 pt-6">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-cyan-600 text-white">A RESERVER MAINTENANT</span>
+          <h2 className="text-2xl font-bold">PADI Open Water — Airlie Beach</h2>
+        </div>
+        <p className="text-slate-500 text-sm mb-4">3 opérateurs principaux. Places limitées à 4-6 stagiaires par instructeur. Réserver au minimum 2 semaines avant. Prix par personne, à vérifier directement.</p>
+
+        <div className="space-y-3 mb-6">
+          {padiOperators.map((op, i) => (
+            <div key={i} className={`border rounded-xl p-4 ${op.highlight ? 'border-cyan-300 bg-cyan-50/30' : 'bg-white border-slate-200'}`}>
+              <div className="flex items-start justify-between gap-3 mb-1">
+                <div className="flex items-center gap-2">
+                  {op.highlight && <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 font-medium shrink-0">Recommandé</span>}
+                  <h4 className="font-bold">{op.name}</h4>
+                </div>
+                <span className="text-lg font-bold text-cyan-700 shrink-0">{op.price} AUD</span>
+              </div>
+              <p className="text-xs text-slate-500 mb-1">{op.type}</p>
+              <p className="text-sm text-slate-600 mb-2">{op.includes}</p>
+              <p className="text-xs text-amber-700 italic mb-2">{op.note}</p>
+              <a href={op.url} target="_blank" rel="noopener noreferrer" className="text-xs text-sky-600 hover:underline cursor-pointer">{op.url.replace('https://', '')} ↗</a>
             </div>
           ))}
         </div>
 
-        <div className="bg-white border rounded-xl p-4 mb-4">
-          <h4 className="font-bold text-sm mb-2">Couts estimes (par personne sauf mention)</h4>
-          <div className="space-y-1">
-            {fraserSimulation.costs.map((c, i) => (
-              <div key={i} className="flex justify-between text-sm py-0.5 border-b border-slate-50 last:border-0">
-                {c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">{c.item} ↗</a> : <span>{c.item}</span>}
-                <span className="font-medium">${c.price}</span>
-              </div>
-            ))}
-            <div className="flex justify-between text-sm font-bold pt-2 border-t">
-              <span>Total par personne</span>
-              <span className="text-amber-600">${fraserTotal}</span>
-            </div>
-            <div className="flex justify-between text-sm font-bold">
-              <span>Total 2 personnes</span>
-              <span className="text-amber-600">${fraserTotalX2}</span>
-            </div>
-          </div>
+        <div className="bg-cyan-50 border border-cyan-200 rounded-xl p-4 text-sm mb-8">
+          <p className="font-medium text-cyan-800 mb-1">Logistique PADI — Ce qu&apos;on sait</p>
+          <p className="text-cyan-700">{whitsundaysPadi.padiInfo}</p>
+          <p className="text-cyan-700 mt-2">💡 Faire l&apos;e-Learning PADI en ligne AVANT le voyage (gratuit si inclus dans le package) = gagner 1 jour sur place.</p>
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-          <p><strong>Logistique :</strong> {fraserSimulation.note}</p>
-          <p className="mt-2"><strong>Impact calendrier :</strong> +4 jours (J8-J11). Le vol vers les Whitsundays passe au J12 au lieu du J8.</p>
+        {/* HOSTELS */}
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xs font-bold px-2 py-1 rounded bg-slate-500 text-white">A RESERVER MAINTENANT</span>
+          <h2 className="text-2xl font-bold">Hostels — Airlie Beach</h2>
+        </div>
+        <p className="text-slate-500 text-sm mb-4">Arrivée le 8 mai (après-midi). Minimum 5-6 nuits (jusqu&apos;au J13/J14). Prix par nuit, chambre double ou dortoir par personne.</p>
+
+        <div className="space-y-3 mb-8">
+          {airlieHostels.map((h, i) => (
+            <div key={i} className={`border rounded-xl p-4 ${h.highlight ? 'border-slate-300 bg-slate-50/50' : 'bg-white border-slate-200'}`}>
+              <div className="flex items-start justify-between gap-3 mb-1">
+                <div className="flex items-center gap-2">
+                  {h.highlight && <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-medium shrink-0">Recommandé</span>}
+                  <h4 className="font-bold">{h.name}</h4>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="text-xs text-slate-400">Dortoir /pers</div>
+                  <div className="font-bold text-slate-700">{h.dorm}</div>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500 mb-1">{h.type}</p>
+              <p className="text-sm text-slate-600 mb-2">{h.note}</p>
+              <a href={h.url} target="_blank" rel="noopener noreferrer" className="text-xs text-sky-600 hover:underline cursor-pointer">{h.url.replace('https://', '')} ↗</a>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* ==================== WHITSUNDAYS + PADI ==================== */}
       <div className="border-t-2 border-purple-300 pt-6">
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-xs font-bold px-2 py-1 rounded bg-purple-500 text-white">RECOS</span>
+          <span className="text-xs font-bold px-2 py-1 rounded bg-purple-500 text-white">OPTIONS</span>
           <h2 className="text-2xl font-bold">{whitsundaysPadi.title}</h2>
         </div>
         <p className="text-slate-500 text-sm mb-4">{whitsundaysPadi.padiInfo}</p>
@@ -421,16 +537,15 @@ export function ConfirmeTab() {
       <div className="bg-gradient-to-r from-slate-800 to-slate-700 text-white rounded-xl p-6">
         <h3 className="font-bold text-lg mb-4">Estimation grand total (2 personnes)</h3>
         <div className="space-y-2 text-sm">
-          <div className="flex justify-between"><span className="opacity-75">Partie 1 — Byron Region (J0-J7)</span><span className="font-bold">${part1Total}</span></div>
-          <div className="flex justify-between"><span className="opacity-75">Fraser Island (J8-J11)</span><span className="font-bold">${fraserTotalX2}</span></div>
-          <div className="flex justify-between"><span className="opacity-75">Whitsundays + PADI Option A (J12-J16)</span><span className="font-bold">~${whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0)}</span></div>
+          <div className="flex justify-between"><span className="opacity-75">Partie 1 — Van Road Trip Byron Region (J0-J8)</span><span className="font-bold">${part1Total}</span></div>
+          <div className="flex justify-between"><span className="opacity-75">Whitsundays + PADI Option A (J9-J16)</span><span className="font-bold">~${whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0)}</span></div>
           <div className="flex justify-between pt-2 mt-2 border-t border-white/20 text-lg">
             <span className="font-bold">TOTAL ESTIME</span>
-            <span className="font-bold">${part1Total + fraserTotalX2 + (whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0) || 0)}</span>
+            <span className="font-bold">${part1Total + (whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0) || 0)}</span>
           </div>
-          <div className="text-right text-xs opacity-60">${Math.round((part1Total + fraserTotalX2 + (whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0) || 0)) / 2)} par personne</div>
+          <div className="text-right text-xs opacity-60">${Math.round((part1Total + (whitsundaysPadi.options[0].cost?.reduce((s, c) => s + (c.item.includes('Repas') || c.item.includes('Navettes') || c.item.includes('Hostel') ? c.price : c.price * 2), 0) || 0)) / 2)} par personne</div>
         </div>
-        <p className="text-xs opacity-50 mt-4">Voyage total : 17 jours (30 avril → 16 mai). Prix indicatifs, activites au tarif moyen.</p>
+        <p className="text-xs opacity-50 mt-4">Voyage total : 17 jours (30 avril → 16 mai). Fraser Island non inclus (option abandonnée). Prix indicatifs.</p>
       </div>
     </div>
   )
@@ -454,7 +569,7 @@ export function ItineraireTab() {
 
         return (
           <div key={day.day}>
-            {day.day === 8 && (
+            {day.day === 9 && (
               <div className="my-6 flex items-center gap-3">
                 <div className="flex-1 h-px bg-orange-300" />
                 <span className="text-orange-600 font-bold text-sm">PARTIE 2 — Whitsundays & Grande Barrière de Corail</span>
